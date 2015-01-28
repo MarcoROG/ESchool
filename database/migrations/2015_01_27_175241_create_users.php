@@ -17,9 +17,9 @@ class CreateUsers extends Migration {
 			$table->increments('id');
 
 			//Personal data
-			$table->string('name');
-			$table->string('middle_name');
-			$table->string('surname');
+			$table->string('name',30);
+			$table->string('middle_name',30);
+			$table->string('surname',30);
 			$table->timestamp('birth_day');
 			$table->string('birth_place');
 			$table->boolean('catholic');
