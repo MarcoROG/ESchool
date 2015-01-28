@@ -12,7 +12,7 @@ class CreateClasses extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('clases', function(Blueprint $table)
+		Schema::create('classes', function(Blueprint $table)
 		{
 			$table->increments('id');
 			$table->tinyInteger('academic_year');
@@ -32,7 +32,7 @@ class CreateClasses extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('clases');
+		Schema::drop('classes');
 	}
 
 }
