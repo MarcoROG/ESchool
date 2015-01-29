@@ -19,17 +19,21 @@ class CreateMessages extends Migration {
 			$table->text('message');
 			$table->boolean('private');
 
+			$table->integer('sender');
+			$table->foreign('sender')->references('id')->on('users');
 			//Filters
 			$table->tinyInteger('academic_year')->nullable();
-			$table->foreign('academic_year')->references('academic_year')->on('classes');
 
 			$table->char('section',1)->nullable();
-			$table->foreign('section')->references('section')->on('classes');
 
 			$table->tinyInteger('role')->nullable();
-			$table->foreign('role')->references('role')->on('roles');
+			$table->foreign('role')->references('id')->on('roles');
+
+			$table->integer('target')->nullable();
+			$table->foreign('target')->references('id')->on('users');
 
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

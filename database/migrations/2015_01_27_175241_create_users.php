@@ -19,7 +19,7 @@ class CreateUsers extends Migration {
 			//Personal data
 			$table->string('name',30);
 			$table->string('middle_name',30);
-			$table->string('surname',30);
+			$table->string('surname',30)->index();
 			$table->timestamp('birth_day');
 			$table->string('birth_place');
 			$table->boolean('catholic');
@@ -28,11 +28,12 @@ class CreateUsers extends Migration {
 			$table->string('address');
 			$table->string('email')->unique();
 			$table->string('telephone');
-			$table->string('mobile');
+			$table->string('mobile')->nullable();
 
 			//Account information
 			$table->string('password');
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

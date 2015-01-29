@@ -17,6 +17,7 @@ class CreateResources extends Migration {
 			$table->increments('id');
 			$table->string('url');
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 

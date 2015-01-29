@@ -24,6 +24,8 @@ class CreateAbsences extends Migration {
 			$table->integer('lesson');
 			$table->foreign('lesson')->references('id')->on('lessons');
 
+			$table->string('reason')->nullable();
+			$table->boolean('accepted');
 			$table->timestamps();
 		});
 	}

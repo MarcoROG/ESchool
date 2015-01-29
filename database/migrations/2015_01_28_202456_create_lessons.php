@@ -15,9 +15,11 @@ class CreateLessons extends Migration {
 		Schema::create('lessons', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->date('day');
-			$table->tinyInteger('hour');
+			$table->timestamp('time');
 			$table->string('notes');
+
+			$table->integer('teacher');
+			$table->foreign('teacher')->references('id')->on('users');
 
 			$table->tinyInteger('classroom');
 			$table->foreign('classroom')->references('id')->on('classrooms');
