@@ -18,13 +18,13 @@ class CreateLessons extends Migration {
 			$table->timestamp('time');
 			$table->string('notes');
 
-			$table->integer('teacher');
+			$table->integer('teacher')->unsigned();
 			$table->foreign('teacher')->references('id')->on('users');
 
-			$table->tinyInteger('classroom');
+			$table->smallInteger('classroom')->unsigned();
 			$table->foreign('classroom')->references('id')->on('classrooms');
 
-			$table->tinyInteger('type');
+			$table->tinyInteger('type')->unsigned();
 			$table->foreign('type')->references('id')->on('lesson_types');
 
 			$table->timestamps();

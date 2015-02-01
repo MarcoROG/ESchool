@@ -17,8 +17,11 @@ class CreateTopics extends Migration {
 			$table->increments('id');
 			$table->string('description');
 
-			$table->tinyInteger('subject');
+			$table->tinyInteger('subject')->unsigned();
 			$table->foreign('subject')->references('id')->on('subjects');
+
+			$table->integer('class')->unsigned();
+			$table->foreign('class')->references('id')->on('classes');
 
 			$table->timestamps();
 		});

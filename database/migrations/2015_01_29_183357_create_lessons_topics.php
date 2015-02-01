@@ -16,10 +16,10 @@ class CreateLessonsTopics extends Migration {
 		{
 			$table->increments('id');
 
-			$table->integer('lesson');
+			$table->integer('lesson')->unsigned();
 			$table->foreign('lesson')->references('id')->on('lessons');
 
-			$table->integer('topic');
+			$table->integer('topic')->unsigned();
 			$table->foreign('topic')->references('id')->on('topics');
 
 			$table->timestamps();

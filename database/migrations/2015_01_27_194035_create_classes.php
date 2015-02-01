@@ -15,11 +15,16 @@ class CreateClasses extends Migration {
 		Schema::create('classes', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->tinyInteger('academic_year')->nullable();
+
+			$table->tinyInteger('academic_year')->unsigned()->nullable();//1° 2° 3° 4° ecc
+
+
 			$table->char('section',1)->nullable();
 			$table->string('name',30)->unique();
+
 			$table->integer('year_id')->unsigned();
 			$table->foreign('year_id')->references('id')->on('school_years');
+
 			$table->boolean('open');
 
 			$table->timestamps();

@@ -16,10 +16,10 @@ class CreateLessonsTests extends Migration {
 		{
 			$table->increments('id');
 
-			$table->integer('test');
+			$table->integer('test')->unsigned();
 			$table->foreign('test')->references('id')->on('tests');
 
-			$table->integer('lesson');
+			$table->integer('lesson')->unsigned();
 			$table->foreign('lesson')->references('id')->on('lessons');
 
 			$table->timestamps();

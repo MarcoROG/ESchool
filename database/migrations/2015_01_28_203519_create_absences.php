@@ -15,17 +15,17 @@ class CreateAbsences extends Migration {
 		Schema::create('absences', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('justifier');
+			$table->integer('justifier')->unsigned();
 			$table->foreign('justifier')->references('id')->on('users');
 
-			$table->integer('absent');
+			$table->integer('absent')->unsigned();
 			$table->foreign('absent')->references('id')->on('users');
 
-			$table->integer('lesson');
+			$table->integer('lesson')->unsigned();
 			$table->foreign('lesson')->references('id')->on('lessons');
 
 			$table->string('reason')->nullable();
-			$table->boolean('accepted');
+			$table->boolean('accepted')->default(false);
 			$table->timestamps();
 		});
 	}

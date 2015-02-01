@@ -16,8 +16,8 @@ class CreateTestsUsers extends Migration {
 		{
 			$table->increments('id');
 
-			$table->integer('tutor');
-			$table->foreign('tutor')->references('id')->on('users');
+			$table->integer('student')->unsigned();
+			$table->foreign('student')->references('id')->on('users');
 
 			$table->integer('test');
 			$table->foreign('test')->references('id')->on('tests');

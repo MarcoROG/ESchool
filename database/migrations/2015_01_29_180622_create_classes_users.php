@@ -16,13 +16,13 @@ class CreateClassesUsers extends Migration {
 		{
 			$table->increments('id');
 
-			$table->integer('user');
+			$table->integer('user')->unsigned();
 			$table->foreign('user')->references('id')->on('users');
 
-			$table->integer('class');
+			$table->integer('class')->unsigned();
 			$table->foreign('class')->references('id')->on('classes');
 
-			$table->integer('subject')->nullable();
+			$table->integer('subject')->unsigned()->nullable();
 			$table->foreign('subject')->references('id')->on('subjects');
 
 			$table->timestamps();

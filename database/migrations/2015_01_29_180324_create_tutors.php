@@ -16,10 +16,10 @@ class CreateTutors extends Migration {
 		{
 			$table->increments('id');
 
-			$table->integer('tutor');
+			$table->integer('tutor')->unsigned();
 			$table->foreign('tutor')->references('id')->on('users');
 
-			$table->integer('tutored');
+			$table->integer('tutored')->unsigned();
 			$table->foreign('tutored')->references('id')->on('users');
 
 			$table->timestamps();

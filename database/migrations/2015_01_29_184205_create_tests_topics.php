@@ -16,10 +16,10 @@ class CreateTestsTopics extends Migration {
 		{
 			$table->increments('id');
 
-			$table->integer('test');
+			$table->integer('test')->unsigned();
 			$table->foreign('test')->references('id')->on('tests');
 
-			$table->integer('topic');
+			$table->integer('topic')->unsigned();
 			$table->foreign('topic')->references('id')->on('topics');
 
 			$table->timestamps();

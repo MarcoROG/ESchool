@@ -16,7 +16,8 @@ class CreateTests extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->tinyInteger('type');
+
+			$table->tinyInteger('type')->unsigned();
 			$table->foreign('type')->references('id')->on('test_types');
 
 			$table->timestamps();

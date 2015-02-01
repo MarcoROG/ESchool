@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClassrooms extends Migration {
+class CreateMessageTypes extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,10 @@ class CreateClassrooms extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('classrooms', function(Blueprint $table)
+		Schema::create('message_types', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->char('floor',1)->nullable();
-			$table->tinyInteger('number')->unsigned()->nullable();
-			$table->string('name',30);
+			$table->string('type',30);
 			$table->timestamps();
 		});
 	}
@@ -29,7 +27,7 @@ class CreateClassrooms extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('classrooms');
+		Schema::drop('message_types');
 	}
 
 }
