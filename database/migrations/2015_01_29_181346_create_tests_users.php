@@ -22,7 +22,7 @@ class CreateTestsUsers extends Migration {
 			$table->integer('test');
 			$table->foreign('test')->references('id')->on('tests');
 
-			$table->decimal('grade',2,1);
+			$table->decimal('grade',3,1);
 
 			$table->timestamps();
 		});
