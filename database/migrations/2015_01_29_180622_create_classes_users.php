@@ -25,6 +25,9 @@ class CreateClassesUsers extends Migration {
 			$table->integer('subject')->unsigned()->nullable();
 			$table->foreign('subject')->references('id')->on('subjects');
 
+			$table->boolean('coordinator');
+
+			$table->softDeletes();
 			$table->timestamps();
 		});
 	}
