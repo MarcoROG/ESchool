@@ -12,11 +12,13 @@ use \App\User;
 
 trait TakesClasses {
     /**
-     * @param
-     * @return mixed
+     * Returns the classes followed by an user.
+     * @access public
+     * @relationship many-many
+     * @return Class[]
      */
     public function classes(){
-        $this->hasMany('Class','classes_users','user','class');
+        $this->hasMany('Class','classes_users','class','user');
     }
     abstract public function hasMany();
 }

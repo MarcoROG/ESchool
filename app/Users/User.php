@@ -35,18 +35,20 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	/**
 	 * The roles of the user inside the system.
 	 * @access public
+	 * @relationship many-many
 	 * @return Role[]
      */
 	public function roles(){
-		$this->hasMany('Role','role','user');
+		$this->hasMany('Role','roles_users','user','role');
 	}
 
 	/**
 	 * All the messages sent by the user.
 	 * @access public
+	 * @relationship one-many
 	 * @return Message[]
      */
 	public function sentMessages(){
-		$this->hasMany('Message',null,'sender');
+		$this->hasMany('Message','sender');
 	}
 }

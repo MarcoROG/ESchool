@@ -17,6 +17,7 @@ class Teacher extends User {
     /**
      * Subjects taught by a teacher.
      * @access public
+     * @relationship many-many
      * @return Subject[]
      */
     public function subjects(){
@@ -26,9 +27,10 @@ class Teacher extends User {
     /**
      * Lessons held by the teacher.
      * @access public
+     * @relationship one-many
      * @return Lesson[]
      */
     public function lessons(){
-        $this->hasMany('Lesson',null,'teacher');
+        $this->hasMany('Lesson','teacher');
     }
 }

@@ -22,8 +22,8 @@ class CreateClasses extends Migration {
 			$table->char('section',1)->nullable();
 			$table->string('name',30)->unique();
 
-			$table->integer('year_id')->unsigned();
-			$table->foreign('year_id')->references('id')->on('school_years');
+			$table->integer('schoolyear')->unsigned();
+			$table->foreign('schoolyear')->references('id')->on('school_years');
 
 			$table->boolean('open');
 
