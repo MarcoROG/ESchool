@@ -20,8 +20,8 @@ class Teacher extends User {
      * @relationship many-many
      * @return Subject[]
      */
-    public function subjects(){
-        $this->hasMany('Subject','classes_users','user','subject')->distinct('subject');
+    public function taughtSubjects(){
+        $this->belongsToMany(Subject::class,'classes_users','user','subject')->distinct('subject');
     }
 
     /**
@@ -30,7 +30,7 @@ class Teacher extends User {
      * @relationship one-many
      * @return Lesson[]
      */
-    public function lessons(){
-        $this->hasMany('Lesson','teacher');
+    public function heldLessons(){
+        $this->hasMany(Lesson::class,'teacher');
     }
 }

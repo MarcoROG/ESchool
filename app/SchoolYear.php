@@ -24,8 +24,8 @@ class SchoolYear extends Model {
      * @relationship one-many
      * @return Class[]
      */
-    public function classes(){
-        $this->hasMany('Course','schoolyear');
+    public function classesOfThisYear(){
+        $this->hasMany(Course::class,'schoolyear');
     }
 
 }

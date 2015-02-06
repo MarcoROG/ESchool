@@ -18,8 +18,8 @@ class Guardian extends User {
      * @relationship many-many
      * @return User(Student)[]
      */
-    public function minors(){
-        $this->hasMany('User','tutors','tutor','tutored');
+    public function tutoredMinors(){
+        $this->belongsToMany(Student::class,'tutors','tutor','tutored');
     }
 
     /**
@@ -29,6 +29,6 @@ class Guardian extends User {
      * @return Absence[]
      */
     public function justifiedAbsences(){
-        $this->hasMany('Absence','tutor');
+        $this->hasMany(Absence::class,'tutor');
     }
 }

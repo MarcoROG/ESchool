@@ -17,10 +17,10 @@ class Student  extends User{
      * Returns the guardians responsible for the minor.
      * @access public
      * @relationship many-many
-     * @return User(Guardian)[]
+     * @return Guardian[]
      */
     public function guardians(){
-        $this->hasMany('User','tutors','tutored','tutor');
+        $this->belongsToMany(Guardian::class, 'tutors','tutored','tutor');
     }
 
     /**
@@ -29,8 +29,8 @@ class Student  extends User{
      * @relationship many-many
      * @return Test[]
      */
-    public function tests(){
-        $this->hasMany('Test','tests_users','student','test');
+    public function takenTests(){
+        $this->belongsToMany(Test::class,'tests_users','student','test');
     }
 
     /**
@@ -40,6 +40,6 @@ class Student  extends User{
      * @return Absence[]
      */
     public function absences(){
-        $this->hasMany('Absence','absent');
+        $this->hasMany(Absence::class,'absent');
     }
 }

@@ -39,7 +39,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @return Role[]
      */
 	public function roles(){
-		$this->hasMany('Role','roles_users','user','role');
+		$this->belongsToMany(Role::class,'roles_users','user','role');
 	}
 
 	/**
@@ -49,6 +49,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @return Message[]
      */
 	public function sentMessages(){
-		$this->hasMany('Message','sender');
+		$this->hasMany(Message::class,'sender');
 	}
 }

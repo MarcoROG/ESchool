@@ -15,7 +15,7 @@ class CreateAbsences extends Migration {
 		Schema::create('absences', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('tutor')->unsigned();
+			$table->integer('tutor')->unsigned()->nullable();
 			$table->foreign('tutor')->references('id')->on('users');
 
 			$table->integer('absent')->unsigned();

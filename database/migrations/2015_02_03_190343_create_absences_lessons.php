@@ -22,6 +22,8 @@ class CreateAbsencesLessons extends Migration {
 			$table->integer('lesson')->unsigned();
 			$table->foreign('lesson')->references('id')->on('lessons');
 
+			$table->timestamp('time')->nullable();
+
 			$table->timestamps();
 		});
 	}
