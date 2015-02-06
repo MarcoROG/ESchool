@@ -1,39 +1,39 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreateTutors extends Migration {
+class CreateTutors extends Migration
+{
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('tutors', function(Blueprint $table)
-		{
-			$table->increments('id');
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('tutors', function (Blueprint $table) {
+            $table->increments('id');
 
-			$table->integer('tutor')->unsigned();
-			$table->foreign('tutor')->references('id')->on('users');
+            $table->integer('tutor')->index()->unsigned();
+            $table->foreign('tutor')->references('id')->on('users');
 
-			$table->integer('tutored')->unsigned();
-			$table->foreign('tutored')->references('id')->on('users');
+            $table->integer('tutored')->index()->unsigned();
+            $table->foreign('tutored')->references('id')->on('users');
 
-			$table->timestamps();
-		});
-	}
+            $table->timestamps();
+        });
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('tutors');
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('tutors');
+    }
 
 }

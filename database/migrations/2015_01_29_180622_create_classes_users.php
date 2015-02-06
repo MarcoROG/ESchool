@@ -16,13 +16,13 @@ class CreateClassesUsers extends Migration {
 		{
 			$table->increments('id');
 
-			$table->integer('user')->unsigned();
+			$table->integer('user')->index()->unsigned();
 			$table->foreign('user')->references('id')->on('users');
 
-			$table->integer('class')->unsigned();
+			$table->integer('class')->index()->unsigned();
 			$table->foreign('class')->references('id')->on('classes');
 
-			$table->integer('subject')->unsigned()->nullable();
+			$table->integer('subject')->index()->unsigned()->nullable();
 			$table->foreign('subject')->references('id')->on('subjects');
 
 			$table->boolean('coordinator');

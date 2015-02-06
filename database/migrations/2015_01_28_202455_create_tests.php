@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateSchoolYears extends Migration
+class CreateTests extends Migration
 {
 
     /**
@@ -13,10 +13,13 @@ class CreateSchoolYears extends Migration
      */
     public function up()
     {
-        Schema::create('school_years', function (Blueprint $table) {
+        Schema::create('tests', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamp('first_day');
-            $table->timestamp('last_day');
+            $table->string('name');
+
+            $table->integer('type')->index()->unsigned();
+            $table->foreign('type')->references('id')->on('test_types');
+
             $table->timestamps();
         });
     }
@@ -28,7 +31,7 @@ class CreateSchoolYears extends Migration
      */
     public function down()
     {
-        Schema::drop('school_years');
+        Schema::drop('tests');
     }
 
 }

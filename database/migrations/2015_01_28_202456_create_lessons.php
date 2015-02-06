@@ -1,47 +1,47 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
-class CreateLessons extends Migration {
+class CreateLessons extends Migration
+{
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('lessons', function(Blueprint $table)
-		{
-			$table->increments('id');
-			$table->timestamp('time');
-			$table->string('notes');
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('lessons', function (Blueprint $table) {
+            $table->increments('id');
+            $table->timestamp('time');
+            $table->string('notes');
 
-			$table->integer('teacher')->unsigned();
-			$table->foreign('teacher')->references('id')->on('users');
+            $table->integer('teacher')->unsigned();
+            $table->foreign('teacher')->references('id')->on('users');
 
-			$table->smallInteger('classroom')->unsigned();
-			$table->foreign('classroom')->references('id')->on('classrooms');
+            $table->integer('classroom')->index()->unsigned();
+            $table->foreign('classroom')->references('id')->on('classrooms');
 
-			$table->tinyInteger('type')->unsigned();
-			$table->foreign('type')->references('id')->on('lesson_types');
+            $table->integer('type')->index()->unsigned();
+            $table->foreign('type')->references('id')->on('lesson_types');
 
-			$table->integer('test')->unsigned()->nullable();
-			$table->foreign('test')->references('id')->on('tests');
+            $table->integer('test')->index()->unsigned()->nullable();
+            $table->foreign('test')->references('id')->on('tests');
 
-			$table->timestamps();
-		});
-	}
+            $table->timestamps();
+        });
+    }
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('lessons');
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('lessons');
+    }
 
 }
