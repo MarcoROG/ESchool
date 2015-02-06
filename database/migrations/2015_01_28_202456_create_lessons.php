@@ -27,6 +27,9 @@ class CreateLessons extends Migration {
 			$table->tinyInteger('type')->unsigned();
 			$table->foreign('type')->references('id')->on('lesson_types');
 
+			$table->integer('test')->unsigned()->nullable();
+			$table->foreign('test')->references('id')->on('tests');
+
 			$table->timestamps();
 		});
 	}

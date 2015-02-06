@@ -63,6 +63,6 @@ class Test extends Model {
      * @return Lesson[]
      */
     public function conductedInLessons(){
-        $this->hasMany(Lesson::class,'lessons_tests','test','lesson');
+        $this->hasMany(Lesson::class,'test');
     }
 }
