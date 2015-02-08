@@ -30,6 +30,9 @@ class CreateLessons extends Migration
             $table->integer('test')->index()->unsigned()->nullable();
             $table->foreign('test')->references('id')->on('tests');
 
+            $table->integer('schooltrip')->index()->unsigned()->nullable();
+            $table->foreign('schooltrip')->references('id')->on('schooltrips');
+
             $table->timestamps();
         });
     }

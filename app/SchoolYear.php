@@ -15,7 +15,8 @@ class SchoolYear extends Model {
      *
      * @var array
      */
-    protected $fillable = ['first_day','last_day'];
+    protected $fillable = ['first_day_first_semester','last_day_first_semester',
+        'first_day_second_semester','last_day_second_semester'];
 
 
     /**

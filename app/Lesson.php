@@ -16,7 +16,7 @@ class Lesson extends Model {
      *
      * @var array
      */
-    protected $fillable = ['time','notes','teacher','classroom','type','test'];
+    protected $fillable = ['time','notes','teacher','classroom','type','test','schooltrip'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -93,5 +93,15 @@ class Lesson extends Model {
      */
     public function plannedTest(){
         $this->belongsTo(Test::class,'test');
+    }
+
+    /**
+     * An eventual trip planned for that lesson.
+     * @access public
+     * @relationship many-one
+     * @return SchoolTrip
+     */
+    public function plannedTrip(){
+        $this->belongsTo(SchoolTrip::class,'schooltrip');
     }
 }

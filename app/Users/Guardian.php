@@ -31,4 +31,14 @@ class Guardian extends User {
     public function justifiedAbsences(){
         $this->hasMany(Absence::class,'tutor');
     }
+
+    /**
+     * All the schooltrips authorized by the guardian.
+     * @access public
+     * @relationship many-many
+     * @return SchoolTrip[]
+     */
+    public function authorizedTrips(){
+        $this->belongsToMany(SchoolTrip::class,'schooltrips_users','tutor','schooltrip');
+    }
 }

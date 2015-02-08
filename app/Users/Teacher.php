@@ -33,4 +33,6 @@ class Teacher extends User {
     public function heldLessons(){
         $this->hasMany(Lesson::class,'teacher');
     }
+
+
 }

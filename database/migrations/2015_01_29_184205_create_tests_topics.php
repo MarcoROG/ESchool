@@ -22,6 +22,8 @@ class CreateTestsTopics extends Migration
             $table->integer('topic')->index()->unsigned();
             $table->foreign('topic')->references('id')->on('topics');
 
+            $table->string('notes');
+
             $table->timestamps();
         });
     }

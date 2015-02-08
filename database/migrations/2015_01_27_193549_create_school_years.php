@@ -15,8 +15,11 @@ class CreateSchoolYears extends Migration
     {
         Schema::create('school_years', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamp('first_day');
-            $table->timestamp('last_day');
+            $table->timestamp('first_day_first_semester');
+            $table->timestamp('last_day_first_semester');
+
+            $table->timestamp('first_day_second_semester');
+            $table->timestamp('last_day_second_semester');
             $table->timestamps();
         });
     }
