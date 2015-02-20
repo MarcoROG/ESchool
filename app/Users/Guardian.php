@@ -19,7 +19,7 @@ class Guardian extends User {
      * @return User(Student)[]
      */
     public function tutoredMinors(){
-        $this->belongsToMany(Student::class,'tutors','tutor','tutored');
+        return $this->belongsToMany(Student::class,'tutors','tutor','tutored');
     }
 
     /**
@@ -29,7 +29,7 @@ class Guardian extends User {
      * @return Absence[]
      */
     public function justifiedAbsences(){
-        $this->hasMany(Absence::class,'tutor');
+        return $this->hasMany(Absence::class,'tutor');
     }
 
     /**
@@ -39,6 +39,6 @@ class Guardian extends User {
      * @return SchoolTrip[]
      */
     public function authorizedTrips(){
-        $this->belongsToMany(SchoolTrip::class,'schooltrips_users','tutor','schooltrip');
+        return $this->belongsToMany(SchoolTrip::class,'schooltrips_users','tutor','schooltrip');
     }
 }

@@ -33,6 +33,6 @@ class TestType extends Model {
      * @return Test[]
      */
     public function testsOfType(){
-        $this->hasMany(Test::class,'type');
+        return $this->hasMany(Test::class,'type');
     }
 }

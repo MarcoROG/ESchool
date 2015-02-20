@@ -12,7 +12,7 @@ namespace App;
 
 
 class Teacher extends User {
-    use \TakesClasses
+    use \TakesClasses , \MakesConferences;
 
     /**
      * Subjects taught by a teacher.
@@ -21,7 +21,7 @@ class Teacher extends User {
      * @return Subject[]
      */
     public function taughtSubjects(){
-        $this->belongsToMany(Subject::class,'classes_users','user','subject')->distinct('subject');
+        return $this->belongsToMany(Subject::class,'classes_users','user','subject')->distinct('subject');
     }
 
     /**
@@ -31,7 +31,7 @@ class Teacher extends User {
      * @return Lesson[]
      */
     public function heldLessons(){
-        $this->hasMany(Lesson::class,'teacher');
+        return $this->hasMany(Lesson::class,'teacher');
     }
 
 

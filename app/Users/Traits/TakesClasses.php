@@ -18,7 +18,7 @@ trait TakesClasses {
      * @return Class[]
      */
     public function takenClasses(){
-        $this->belongsToMany(Course::class ,'classes_users','class','user');
+        return $this->belongsToMany(Course::class ,'classes_users','class','user');
     }
     abstract public function belongsToMany();
 }

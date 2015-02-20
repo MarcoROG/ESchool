@@ -33,7 +33,7 @@ class MessageType extends Model {
      * @return Message[]
      */
     public function messagesOfType(){
-        $this->hasMany(Message::class,'type');
+        return $this->hasMany(Message::class,'type');
     }
 
 }

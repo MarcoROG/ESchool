@@ -1,63 +1,46 @@
-@extends('app')
-
+@extends('parents.master')
 @section('content')
-<div class="container-fluid">
-	<div class="row">
-		<div class="col-md-8 col-md-offset-2">
-			<div class="panel panel-default">
-				<div class="panel-heading">Login</div>
-				<div class="panel-body">
-					@if (count($errors) > 0)
-						<div class="alert alert-danger">
-							<strong>Whoops!</strong> There were some problems with your input.<br><br>
-							<ul>
-								@foreach ($errors->all() as $error)
-									<li>{{ $error }}</li>
-								@endforeach
-							</ul>
-						</div>
-					@endif
+    <div class="card-panel">
+        <form  role="form" method="POST" action="/auth/login" >
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <div class="row">
+                <h3 class="offset-s1 col s10">Login</h3>
+            </div>
+            @include('partials.errors-section')
+            <div class="row">
+                <div class="input-field col s10 offset-s1 " >
+                    <input type="email" class="validate" id="email" name="email" value="{{ old('email') }}">
+                    <label for="email">Indirizzo email</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s10 offset-s1">
+                    <input type="password" class="validate" id="password" name="password" >
+                    <label for="password">Password</label>
+                </div>
+            </div>
 
-					<form class="form-horizontal" role="form" method="POST" action="/auth/login">
-						<input type="hidden" name="_token" value="{{ csrf_token() }}">
+            <div class="row">
+                <div class="input-field col s8 offset-s1">
+                    <input type="checkbox" name="remember" id="remember" >
+                    <label for="remember">Ricordami</label><br>
+                </div>
 
-						<div class="form-group">
-							<label class="col-md-4 control-label">E-Mail Address</label>
-							<div class="col-md-6">
-								<input type="email" class="form-control" name="email" value="{{ old('email') }}">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<label class="col-md-4 control-label">Password</label>
-							<div class="col-md-6">
-								<input type="password" class="form-control" name="password">
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								<div class="checkbox">
-									<label>
-										<input type="checkbox" name="remember"> Remember Me
-									</label>
-								</div>
-							</div>
-						</div>
-
-						<div class="form-group">
-							<div class="col-md-6 col-md-offset-4">
-								<button type="submit" class="btn btn-primary" style="margin-right: 15px;">
-									Login
-								</button>
-
-								<a href="/password/email">Forgot Your Password?</a>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+                <div class="input-field col s3">
+                    <button class="btn waves-effect waves-light " type="submit" name="action">
+                        Accedi
+                        <i class="mdi-content-send right"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col offset-s1 s10">
+                <a  href="/password/email">Password dimenticata?</a>
+                </div>
+            </div>
+        </form>
+    </div>
 @endsection
+
+
+

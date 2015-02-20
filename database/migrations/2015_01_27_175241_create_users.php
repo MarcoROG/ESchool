@@ -23,6 +23,7 @@ class CreateUsers extends Migration
             $table->timestamp('birth_day');
             $table->string('birth_place');
             $table->boolean('catholic');
+            $table->char('gender',1);//M or F
 
             //Contact information
             $table->string('address');

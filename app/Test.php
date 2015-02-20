@@ -33,7 +33,7 @@ class Test extends Model {
      * @return TestType
      */
     public function type(){
-        $this->belongsTo(TestType::class,'type');
+        return $this->belongsTo(TestType::class,'type');
     }
 
     /**
@@ -43,7 +43,7 @@ class Test extends Model {
      * @return Student[]
      */
     public function evaluatedStudents(){
-        $this->belongsToMany(Student::class,'tests_users','test','student');
+        return $this->belongsToMany(Student::class,'tests_users','test','student');
     }
 
     /**
@@ -53,7 +53,7 @@ class Test extends Model {
      * @return Topic[]
      */
     public function evaluatedTopics(){
-        $this->belongsToMany(Topic::class,'tests_topics','test','topic');
+        return $this->belongsToMany(Topic::class,'tests_topics','test','topic');
     }
 
     /**
@@ -63,6 +63,6 @@ class Test extends Model {
      * @return Lesson[]
      */
     public function conductedInLessons(){
-        $this->hasMany(Lesson::class,'test');
+        return $this->hasMany(Lesson::class,'test');
     }
 }

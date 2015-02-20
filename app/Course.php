@@ -25,7 +25,7 @@ class Course extends Model {
      * @return SchoolYear
      */
     public function year(){
-        $this->belongsTo(SchoolYear::class,'schoolyear');
+        return $this->belongsTo(SchoolYear::class,'schoolyear');
     }
 
     /**
@@ -35,7 +35,7 @@ class Course extends Model {
      * @return Topic[]
      */
     public function tackledTopics(){
-        $this->hasMany(Topic::class,'class');
+        return $this->hasMany(Topic::class,'class');
     }
 
     /**
@@ -45,7 +45,7 @@ class Course extends Model {
      * @return User[](Student|Teacher)
      */
     public function members(){
-        $this->belongsToMany(User::class,'classes_users','class','user');
+        return $this->belongsToMany(User::class,'classes_users','class','user');
     }
 
     /**
@@ -55,6 +55,8 @@ class Course extends Model {
      * @return Lesson[]
      */
     public function lessons(){
-        $this->belongsToMany(Lesson::class,'classes_lessons','class','lesson');
+        return $this->belongsToMany(Lesson::class,'classes_lessons','class','lesson');
     }
+
+
 }

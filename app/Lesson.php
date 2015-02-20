@@ -32,7 +32,7 @@ class Lesson extends Model {
      * @return Teacher
      */
     public function teacher(){
-        $this->belongsTo(Teacher::class,'teacher');
+        return $this->belongsTo(Teacher::class,'teacher');
     }
 
     /**
@@ -42,7 +42,7 @@ class Lesson extends Model {
      * @return Classroom
      */
     public function classroom(){
-        $this->belongsTo(Classroom::class,'classroom');
+        return $this->belongsTo(Classroom::class,'classroom');
     }
 
     /**
@@ -52,7 +52,7 @@ class Lesson extends Model {
      * @return LessonType
      */
     public function type(){
-        $this->belongsTo(LessonType::class,'type');
+        return $this->belongsTo(LessonType::class,'type');
     }
 
     /**
@@ -62,7 +62,7 @@ class Lesson extends Model {
      * @return Absence[]
      */
     public function absences(){
-        $this->belongsToMany(Absence::class,'lesson','absence');
+        return $this->belongsToMany(Absence::class,'lesson','absence');
     }
 
     /**
@@ -72,7 +72,7 @@ class Lesson extends Model {
      * @return Course[]
      */
     public function followingClasses(){
-        $this->belongsToMany(Course::class,'classes_lessons','lesson','class');
+        return $this->belongsToMany(Course::class,'classes_lessons','lesson','class');
     }
 
     /**
@@ -82,7 +82,7 @@ class Lesson extends Model {
      * @return Topic[]
      */
     public function explainedTopics(){
-        $this->belongsToMany(Topic::class,'lessons_topics','lesson','topic');
+        return $this->belongsToMany(Topic::class,'lessons_topics','lesson','topic');
     }
 
     /**
@@ -92,7 +92,7 @@ class Lesson extends Model {
      * @return Test
      */
     public function plannedTest(){
-        $this->belongsTo(Test::class,'test');
+        return $this->belongsTo(Test::class,'test');
     }
 
     /**
@@ -102,6 +102,6 @@ class Lesson extends Model {
      * @return SchoolTrip
      */
     public function plannedTrip(){
-        $this->belongsTo(SchoolTrip::class,'schooltrip');
+        return $this->belongsTo(SchoolTrip::class,'schooltrip');
     }
 }

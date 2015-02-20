@@ -26,12 +26,21 @@ class Classroom extends Model {
     protected $hidden = [];
 
     /**
-     * All the lessons held in a specific classroom
+     * All the lessons held in a specific classroom.
      * @access public
      * @relationship one-many
      * @return Lesson[]
      */
     public function lessonsHeldHere(){
-        $this->hasMany(Lesson::class,'classroom');
+        return $this->hasMany(Lesson::class,'classroom');
+    }
+
+    /**
+     * All the pt_conferences held in a specific classroom.
+     * @relationship one-many
+     * @return Conference[]
+     */
+    public function conferecesHeldHere(){
+        return $this->hasMany(Conference::class,'classroom');
     }
 }

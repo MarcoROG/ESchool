@@ -32,7 +32,7 @@ class Topic extends Model {
      * @return Course
      */
     public function studyingCourse(){
-        $this->belongsTo(Course::class,'class');
+        return $this->belongsTo(Course::class,'class');
     }
 
     /**
@@ -42,7 +42,7 @@ class Topic extends Model {
      * @return Subject
      */
     public function subject(){
-        $this->belongsTo(Subject::class,'subject');
+        return $this->belongsTo(Subject::class,'subject');
     }
 
     /**
@@ -52,7 +52,7 @@ class Topic extends Model {
      * @return Test[]
      */
     public function relatedTests(){
-        $this->belongsToMany(Test::class,'tests_topics','topic','test');
+        return $this->belongsToMany(Test::class,'tests_topics','topic','test');
     }
 
     /**
@@ -62,6 +62,6 @@ class Topic extends Model {
      * @return Lesson[]
      */
     public function explanationLessons(){
-        $this->belongsToMany(Lesson::class,'lessons_topics','topic','lesson');
+        return $this->belongsToMany(Lesson::class,'lessons_topics','topic','lesson');
     }
 }

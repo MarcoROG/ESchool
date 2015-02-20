@@ -32,7 +32,7 @@ class SchoolTrip extends Model {
      * @return Lesson[]
      */
     public function relatedLessons(){
-        $this->hasMany(Lesson::class,'schooltrip');
+        return $this->hasMany(Lesson::class,'schooltrip');
     }
 
     /**
@@ -42,6 +42,6 @@ class SchoolTrip extends Model {
      * @return Guardian[]
      */
     public function receivedAuthorizations(){
-        $this->belongsToMany(Guardian::class,'schooltrips_users','schooltrip','tutor');
+        return $this->belongsToMany(Guardian::class,'schooltrips_users','schooltrip','tutor');
     }
 }

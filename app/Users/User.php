@@ -22,7 +22,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name','middle_name','surname','birth_day','birth_place','catholic',
+	protected $fillable = ['name','middle_name','surname','birth_day','birth_place','catholic','gender',
 		'address','email','telephone','mobile', 'password'];
 
 	/**
@@ -39,7 +39,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @return Role[]
      */
 	public function roles(){
-		$this->belongsToMany(Role::class,'roles_users','user','role');
+		return $this->belongsToMany(Role::class,'roles_users','user','role');
 	}
 
 	/**
@@ -49,6 +49,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @return Message[]
      */
 	public function sentMessages(){
-		$this->hasMany(Message::class,'sender');
+		return $this->hasMany(Message::class,'sender');
 	}
 }

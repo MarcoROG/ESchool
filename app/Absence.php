@@ -32,7 +32,7 @@ class Absence extends Model {
      * @return Guardian
      */
     public function justifier(){
-        $this->belongsTo(Guardian::class,'tutor');
+        return $this->belongsTo(Guardian::class,'tutor');
     }
 
     /**
@@ -42,7 +42,7 @@ class Absence extends Model {
      * @return Student
      */
     public function absent(){
-        $this->belongsTo(Student::class,'absent');
+        return $this->belongsTo(Student::class,'absent');
     }
 
     /**
@@ -52,6 +52,6 @@ class Absence extends Model {
      * @return Lesson[]
      */
     public function missedLessons(){
-        $this->belongsToMany(Lesson::class,'absences_lessons','absence','lesson');
+        return $this->belongsToMany(Lesson::class,'absences_lessons','absence','lesson');
     }
 }

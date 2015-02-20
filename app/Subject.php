@@ -33,7 +33,7 @@ class Subject extends Model {
      * @return Topic[]
      */
     public function relatedTopics(){
-        $this->hasMany(Topic::class,'subject');
+        return $this->hasMany(Topic::class,'subject');
     }
 
     /**
@@ -43,7 +43,7 @@ class Subject extends Model {
      * @return Course[]
      */
     public function studyingClasses(){
-        $this->belongsToMany(Course::class,'classes_users','subject','class');
+        return $this->belongsToMany(Course::class,'classes_users','subject','class');
     }
     /**
      * All the teachers which teach this subject.
@@ -52,6 +52,6 @@ class Subject extends Model {
      * @return Teacher[]
      */
     public function qualifiedTeachers(){
-        $this->belongsToMany(Teacher::class,'classes_users','subject','user')->distinct('user');
+        return $this->belongsToMany(Teacher::class,'classes_users','subject','user')->distinct('user');
     }
 }

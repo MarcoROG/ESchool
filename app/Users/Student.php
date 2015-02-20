@@ -11,7 +11,7 @@ namespace App;
 
 
 class Student  extends User{
-    use \TakesClasses;
+    use \TakesClasses,\MakesConferences;
 
     /**
      * Returns the guardians responsible for the minor.
@@ -20,7 +20,7 @@ class Student  extends User{
      * @return Guardian[]
      */
     public function guardians(){
-        $this->belongsToMany(Guardian::class, 'tutors','tutored','tutor');
+        return $this->belongsToMany(Guardian::class, 'tutors','tutored','tutor');
     }
 
     /**
@@ -30,7 +30,7 @@ class Student  extends User{
      * @return Test[]
      */
     public function takenTests(){
-        $this->belongsToMany(Test::class,'tests_users','student','test');
+        return $this->belongsToMany(Test::class,'tests_users','student','test');
     }
 
     /**
@@ -40,6 +40,6 @@ class Student  extends User{
      * @return Absence[]
      */
     public function absences(){
-        $this->hasMany(Absence::class,'absent');
+        return $this->hasMany(Absence::class,'absent');
     }
 }

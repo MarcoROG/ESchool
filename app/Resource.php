@@ -33,7 +33,7 @@ class Resource extends Model {
      * @return Message[]
      */
     public function relatedMessages(){
-        $this->hasMany(Message::class,'messages_resources','resource','message');
+        return $this->hasMany(Message::class,'messages_resources','resource','message');
     }
 
 }

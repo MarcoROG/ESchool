@@ -32,6 +32,6 @@ class LessonType extends Model {
      * @return Lesson[]
      */
     public function lessonsOfType(){
-        $this->hasMany(Lesson::class,'type');
+        return $this->hasMany(Lesson::class,'type');
     }
 }

@@ -32,9 +32,9 @@ class Message extends Model {
      * @return MessageType
      */
     public function type(){
-        $this->belongsTo(MessageType::class,'type');
+        return $this->belongsTo(MessageType::class,'type');
     }
     public function sender(){
-        $this->belongsTo(User::class,'sender');
+        return $this->belongsTo(User::class,'sender');
     }
 }
