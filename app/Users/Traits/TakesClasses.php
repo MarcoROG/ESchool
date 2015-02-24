@@ -1,4 +1,4 @@
-<?php
+<?php namespace \App\Users\Traits;
 /**
  * Created by PhpStorm.
  * User: marcobellan
@@ -6,7 +6,7 @@
  * Time: 18:35
  */
 
-use \App\User;
+use \App\Users;
 
 
 

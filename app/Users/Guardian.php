@@ -6,7 +6,7 @@
  * Time: 17:15
  */
 
-namespace App;
+namespace App\Users;
 
 
 class Guardian extends User {

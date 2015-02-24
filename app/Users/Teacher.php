@@ -8,7 +8,7 @@
 
 
 
-namespace App;
+namespace App\Users;
 
 
 class Teacher extends User {

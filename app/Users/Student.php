@@ -1,4 +1,4 @@
-<?php
+<?php namespace App\Users;
 /**
  * Created by PhpStorm.
  * User: marcobellan
@@ -7,11 +7,10 @@
  */
 
 
-namespace App;
 
 
 class Student  extends User{
-    use \TakesClasses,\MakesConferences;
+    use \TakesClasses ,\MakesConferences;
 
     /**
      * Returns the guardians responsible for the minor.

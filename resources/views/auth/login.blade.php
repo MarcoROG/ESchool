@@ -6,15 +6,17 @@
             <div class="row">
                 <h3 class="offset-s1 col s10">Login</h3>
             </div>
-            @include('partials.errors-section')
+            @include('partials.messages')
             <div class="row">
                 <div class="input-field col s10 offset-s1 " >
+                    <i class="mdi-communication-email prefix"></i>
                     <input type="email" class="validate" id="email" name="email" value="{{ old('email') }}">
                     <label for="email">Indirizzo email</label>
                 </div>
             </div>
             <div class="row">
                 <div class="input-field col s10 offset-s1">
+                    <i class="mdi-communication-vpn-key prefix"></i>
                     <input type="password" class="validate" id="password" name="password" >
                     <label for="password">Password</label>
                 </div>

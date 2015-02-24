@@ -1,0 +1,24 @@
+{
+  "name": "test-l-5",
+  "version": "0.0.0",
+  "authors": [
+    "Marco Bellan <marcobellan97@gmail.com>"
+  ],
+  "description": "Tosi App",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "tosi",
+    "scuola"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

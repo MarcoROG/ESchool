@@ -1,7 +1,9 @@
 <?php namespace App\Exceptions;
 
 use Exception;
+use HttpResponseException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Laracasts\Flash\Flash;
 
 class Handler extends ExceptionHandler {
 
@@ -38,12 +40,10 @@ class Handler extends ExceptionHandler {
 	{
 		if ($this->isHttpException($e))
 		{
-			return $this->renderHttpException($e);
+            return $this->renderHttpException($e);
 		}
-		else
-		{
-			return parent::render($request, $e);
-		}
+		return parent::render($request, $e);
+		return parent::render($request, $e);
 	}
 
 }

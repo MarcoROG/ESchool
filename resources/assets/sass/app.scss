@@ -1,0 +1,27 @@
+@charset "UTF-8";
+.mdi-alert-danger:before {
+  content: "\e6a0";
+}
+.mdi-alert-info:before{
+  content: "\e638";
+}
+.mdi-alert-success:before{
+  content: "\e623";
+}
+
+.danger{
+  background-color:#ff4a4a;
+}
+.warning{
+  background-color:#fcfc8b;
+}
+.info{
+  background-color: lightskyblue;
+}
+.success{
+  background-color: lawngreen;
+}
+
+.dismisser{
+  cursor: pointer;
+}

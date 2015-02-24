@@ -14,12 +14,13 @@
                 </div>
             </div>
         @endif
-        @include('partials.errors-section')
+        @include('partials.messages')
         <form role="form" method="POST" action="/password/email">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div class="row">
                 <div class="input-field col s10 offset-s1">
+                    <i class="mdi-communication-email prefix"></i>
                     <input type="email" class="validate" name="email" id="email" value="{{ old('email') }}">
                     <label for="email">Indirizzo email</label>
                 </div>
