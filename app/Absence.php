@@ -29,10 +29,10 @@ class Absence extends Model {
      * The guardian who justified this absence.
      * @access public
      * @relationship many-one
-     * @return Guardian
+     * @return User
      */
     public function justifier(){
-        return $this->belongsTo(Guardian::class,'tutor');
+        return $this->belongsTo(User::class,'tutor');
     }
 
     /**

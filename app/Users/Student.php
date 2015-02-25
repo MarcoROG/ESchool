@@ -1,4 +1,8 @@
 <?php namespace App\Users;
+use App\Users\Traits\JustifiesAbsences;
+use App\Users\Traits\MakesConferences;
+use App\Users\Traits\TakesClasses;
+
 /**
  * Created by PhpStorm.
  * User: marcobellan
@@ -10,7 +14,7 @@
 
 
 class Student  extends User{
-    use \TakesClasses ,\MakesConferences;
+    use TakesClasses , MakesConferences, JustifiesAbsences;
 
     /**
      * Returns the guardians responsible for the minor.

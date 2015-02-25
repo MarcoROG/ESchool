@@ -9,8 +9,10 @@
 namespace App\Users;
 
 
-class Guardian extends User {
+use App\Users\Traits\JustifiesAbsences;
 
+class Guardian extends User {
+    use JustifiesAbsences
 
     /**
      * Returns the minors under the responsibility of the guardian.
@@ -20,16 +22,6 @@ class Guardian extends User {
      */
     public function tutoredMinors(){
         return $this->belongsToMany(Student::class,'tutors','tutor','tutored');
-    }
-
-    /**
-     * Returns all the absences justified by the guardian.
-     * @access public
-     * @relationship one-many
-     * @return Absence[]
-     */
-    public function justifiedAbsences(){
-        return $this->hasMany(Absence::class,'tutor');
     }
 
     /**

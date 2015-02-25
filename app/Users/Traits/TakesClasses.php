@@ -1,4 +1,4 @@
-<?php namespace \App\Users\Traits;
+<?php namespace App\Users\Traits;
 /**
  * Created by PhpStorm.
  * User: marcobellan
