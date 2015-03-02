@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="card-panel">
-        @include('partials.messages')
         <form  role="form" method="POST" action="/users" >
 
             <div class="row">
@@ -12,7 +11,7 @@
             </div>
 
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+            @include('partials.messages')
             <div class="row">
                 <div class="col offset-s1 s10">
                     <h5>Informazioni personali</h5>
@@ -45,7 +44,7 @@
                     <label for="birth_day">Giorno di nascita</label>
                 </div>
                 {{--Luogo di nascita--}}
-                <div class="input-field col s5 offset-s1">
+                <div class="input-field col s5 ">
                     <i class="mdi-social-location-city prefix"></i>
                     <input type="text"  name="birth_place" id="birth_place" value="{{ old('birth_place') }}">
                     <label for="birth_place">Luogo di nascita</label>
@@ -71,7 +70,7 @@
                     Religione:
                 </div>
                 <div class="col offset-s1 s7">
-                    <input type="checkbox" id="catholic" checked="<?php if(old('catholic')==true){echo 'checked';} ?>">
+                    <input type="checkbox" id="catholic" name="catholic" checked="<?php if(old('catholic')==true){echo 'checked';} ?>">
                     <label for="catholic">Si avvale dell'insegnamento della religione cattolica</label>
                 </div>
             </div><br>

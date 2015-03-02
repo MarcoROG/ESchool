@@ -5,10 +5,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Kodeine\Acl\Traits\HasRole;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
-	use Authenticatable, CanResetPassword;
+	use Authenticatable, CanResetPassword, HasRole;
 
 	/**
 	 * The database table used by the model.
@@ -32,15 +33,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected $hidden = ['password', 'remember_token'];
 
-	/**
-	 * The roles of the user inside the system.
-	 * @access public
-	 * @relationship many-many
-	 * @return Role[]
-     */
-	public function roles(){
-		return $this->belongsToMany(Role::class,'roles_users','user','role');
-	}
 
 	/**
 	 * All the messages sent by the user.

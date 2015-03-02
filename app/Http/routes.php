@@ -18,11 +18,12 @@ Route::controllers([
 ]);
 
 Route::get('/','HomeController@index');
+Route::get('/home','HomeController@authenticatedIndex');
 
 Route::group(['prefix'=>'users'],function(){
     Route::get('/','UserController@showAll');
     Route::post('/','UserController@register');
-    Route::get('/add',['middleware'=>'secretaryOnly', //TODO Riattivare il controllo nel middleware
+    Route::get('add',['can'=>'add.user', //TODO Riattivare il controllo nel middleware
         'uses'=>'UserController@showSubscriptionInterface']);
-    Route::get('/{id}','UserController@showUser');
+    Route::get('{id}','UserController@showUser');
 });
