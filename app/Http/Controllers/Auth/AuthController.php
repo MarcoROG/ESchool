@@ -1,10 +1,13 @@
 <?php namespace App\Http\Controllers\Auth;
 
+use App\Commands\CreateUserCommand;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AddUserRequest;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers as AutheenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Validator;
+use Kodeine\Acl\Models\Eloquent\Role;
 use Laracasts\Flash\Flash;
 use Illuminate\Http\Request;
 
@@ -64,24 +67,29 @@ class AuthController extends Controller {
             ->withInput($request->only('email', 'remember'));
     }
 
+    public function getRegister(){
+        return view('users.add')
+            ->with('roles',array(
+                Role::where('slug','=','student')->first(),
+                Role::where('slug','=','extern')->first() ))
+            ->with('mode','auto');
+    }
+
     /**
      * Handle a registration request for the application.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function postRegister(Request $request)
+    public function postRegister(AddUserRequest $request)
     {
-        $input=$request->all();
-        $input['password']='123456789';//TODO: random generated password
-        $validator = $this->registrar->validator($input);
-
-        if ($validator->fails())
-        {
-            Flash::warning($validator->errors()->first());
+        $user = $this->dispatch(new CreateUserCommand($request->all()));
+        if($user){
+            Flash::info('Controlla la tua email in attesa del messaggio di attivazione.');
+            $this->auth->login($user);
+        }else {
+            Flash::error('Impossibile effetture la registrazione, riprova più tardi.');
         }
-
-        $this->auth->login($this->registrar->create($input));
 
         return redirect($this->redirectPath());
     }

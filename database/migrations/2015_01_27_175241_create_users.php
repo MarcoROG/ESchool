@@ -33,6 +33,8 @@ class CreateUsers extends Migration
 
             //Account information
             $table->string('password');
+            $table->string('verify_token')->nullable();
+            $table->boolean('verified')->default(false);
             $table->timestamps();
             $table->softDeletes();
         });

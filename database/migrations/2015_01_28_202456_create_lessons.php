@@ -34,6 +34,7 @@ class CreateLessons extends Migration
             $table->foreign('schooltrip')->references('id')->on('schooltrips');
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -23,21 +23,19 @@ class AddUserRequest extends Request {
 	 */
 	public function rules()
 	{
-        $this['catholic']=Request::input('catholic')=='on';
-        $this['password']='123456789';//TODO: random generated password
-
         return [
             'name' => 'required|string|max:30',
             'middle_name' => 'string|max:30',
             'surname' => 'required|string|max:30',
-            'birth_day' => 'required|date|before:'.Carbon::create()->toAtomString(),
-            'birth_place'=>'required|string',
-            //'catholic'=>'boolean',
+            'birth_day' => 'required|date_format:"d/m/Y"|before:'.Carbon::create()->toAtomString(),
+            'birth_place'=>'required|string|max:255',
             'gender'=>'required|string|max:1',
-            'address'=>'required|string',
+            'address'=>'required|string|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'telephone' => 'required|alpha_num',
-            'mobile'=> 'alpha_num',
+            'role'=>'required|in:student,foreign,techer,technician,secretary,ata,student',
+            'telephone' => 'required|alpha_num|max:255',
+            'mobile'=> 'alpha_num|max:255',
+            'password'=>'sometimes|confirmed|min:6|max:255'
 		];
 	}
 

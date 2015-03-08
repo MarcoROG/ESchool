@@ -12,6 +12,7 @@
 */
 
 
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
@@ -26,4 +27,5 @@ Route::group(['prefix'=>'users'],function(){
     Route::get('add',['can'=>'add.user', //TODO Riattivare il controllo nel middleware
         'uses'=>'UserController@showSubscriptionInterface']);
     Route::get('{id}','UserController@showUser');
+    Route::get('verify/{token}','UserController@verifyUser');
 });

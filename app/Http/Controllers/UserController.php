@@ -1,10 +1,12 @@
 <?php namespace App\Http\Controllers;
 
+use App\Commands\CreateUserCommand;
 use App\Http\Requests;
 use App\Http\Requests\AddUserRequest;
 use App\Users\User;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers as AuthenticatesAndRegistersUsers;
+use Kodeine\Acl\Models\Eloquent\Role;
 use Laracasts\Flash\Flash;
 
 class UserController extends Controller {
@@ -30,10 +32,11 @@ class UserController extends Controller {
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function register(AddUserRequest $request){
-        if($this->registrar->create($request->all())instanceof User) {
-            Flash::success('Utente creato correttamente.');
-        } else {
-            Flash::error('Impossibile creare l\'utente.');
+        $request['verified']=true;
+        if($this->dispatch(new CreateUserCommand($request->all()))){
+            Flash::success('Utente registrato correttamente.');
+        }else {
+            Flash::error('Errore durante la creazione dell\'utente.');
         }
         return redirect(url('users/add'));
     }
@@ -44,7 +47,9 @@ class UserController extends Controller {
      * @return \Illuminate\View\View
      */
     public function showSubscriptionInterface(){
-        return view('users.add');
+        return view('users.add')
+            ->with('roles',Role::all())
+            ->with('mode','secretary');
     }
 
     /**
@@ -53,5 +58,21 @@ class UserController extends Controller {
      */
     public function showUser($id){
 
+    }
+
+    /**
+     * Validates an user using his token
+     * @param $token
+     */
+    public static function verifyUser($token){
+        $user=User::onlyTrashed()->where('verify_token',$token)->first();
+        if($user){
+            $user->restore();
+            if(!Auth::user()) Auth::login($user);
+            Flash::success('Verifica account avvenuta con successo!');
+            return redirect(url('home'));
+        }
+        Flash::error('Impossibile attivare l\'account specificato.');
+        return redirect(url('landing'));
     }
 }

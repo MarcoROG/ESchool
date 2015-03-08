@@ -9,9 +9,20 @@
                     <h2>Aggiunta di un utente</h2>
                 </div>
             </div>
-
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             @include('partials.messages')
+            {{--Ruolo--}}
+            <div class="row">
+                <div class="col offset-s1 s10">
+                    <label>Ruolo dell'utente</label>
+                    <select name ="role">
+                        <option value="" disabled="disabled" selected="selected">Scegli un ruolo</option>
+                        @foreach($roles as $role)
+                            <option value="{{$role['slug']}}">{{$role['name']}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
             <div class="row">
                 <div class="col offset-s1 s10">
                     <h5>Informazioni personali</h5>
@@ -56,11 +67,12 @@
                     Sesso:
                 </div>
                 <div class="input-field col s3 offset-s1">
-                    <input type="radio" name="gender" id="Male" value="M" checked="<?php if(old('gender')=="M"){echo 'checked';} ?>">
+
+                    <input type="radio" name="gender" id="Male" value="M" <?php if(old('gender')=="M"){echo 'checked="checked"';} ?>>
                     <label for="Male">Maschio</label>
                 </div>
                 <div class="input-field col s3 offset-s1">
-                    <input type="radio" name="gender" id="Female" value="F" checked="<?php if(old('gender')=="F"){echo 'checked';} ?>">
+                    <input type="radio" name="gender" id="Female" value="F" <?php if(old('gender')=="F"){echo 'checked="checked"';} ?>>
                     <label for="Female">Femmina</label>
                 </div>
             </div><br>
@@ -70,7 +82,7 @@
                     Religione:
                 </div>
                 <div class="col offset-s1 s7">
-                    <input type="checkbox" id="catholic" name="catholic" checked="<?php if(old('catholic')==true){echo 'checked';} ?>">
+                    <input type="checkbox" id="catholic" name="catholic" <?php if(old('catholic')){echo 'checked="checked"';} ?>>
                     <label for="catholic">Si avvale dell'insegnamento della religione cattolica</label>
                 </div>
             </div><br>
@@ -78,21 +90,39 @@
                 <div class="col offset-s1 s10">
                     <h5>Informazioni di recapito</h5>
                 </div>
+                {{--Indirizzo--}}
                 <div class="input-field col offset-s1 s10">
                     <i class="mdi-action-home prefix"></i>
                     <input type="text" name="address" id="address" value="{{ old('address') }}">
                     <label for="address">Indirizzo</label>
                 </div>
+                {{--Email--}}
                 <div class="input-field col offset-s1 s10">
                     <i class="mdi-content-mail prefix"></i>
                     <input type="email" name="email" id="email" class="validate" value="{{ old('email') }}">
                     <label for="email">Email</label>
                 </div>
+                @if($mode=='auto')
+                {{--Password--}}
+                <div class="input-field col offset-s1 s10">
+                    <i class="mdi-communication-vpn-key prefix"></i>
+                    <input type="password" name="password" id="password" class="validate" >
+                    <label for="password">Password</label>
+                </div>
+                {{--Conferma password--}}
+                <div class="input-field col offset-s1 s10">
+                    <i class="mdi-communication-vpn-key prefix"></i>
+                    <input type="password" name="password_confirmation" id="password_confirmation" class="validate">
+                    <label for="password_confirmation">Conferma password</label>
+                </div>
+                @endif
+                {{--Fisso--}}
                 <div class="input-field col offset-s1 s5">
                     <i class="mdi-communication-call prefix"></i>
                     <input type="tel" name="telephone" id="telephone" class="validate" value="{{ old('telephone') }}">
                     <label for="telephone">Numero di telefono domestico</label>
                 </div>
+                {{--Cellulare--}}
                 <div class="input-field col s5">
                     <i class="mdi-hardware-smartphone prefix"></i>
                     <input type="tel" name="mobile" id="mobile" class="validate" value="{{ old('mobile') }}">
@@ -101,12 +131,14 @@
             </div>
             <br>
             <div class="row">
+                {{--Reset--}}
                 <div class="col offset-s1 s4">
                     <button class="btn waves-effect waves-light" type="reset" name="reset">
                         <i class="mdi-content-undo left"></i>
                         Resetta campi
                     </button>
                 </div>
+                {{--Submit--}}
                 <div class="col offset-s3 s4">
                     <button class="btn waves-effect waves-light" type="submit" name="action">
                         <i class="mdi-content-send right"></i>

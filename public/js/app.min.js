@@ -5,6 +5,7 @@ $(document).ready(function(){
     if($('.modal').length!=0) {
         $('.modal').openModal();
     }
+    $('select').material_select();
 });
 $('.dismisser').click(function(){
     $(this).closest("div.dismissable").hide("slow");
