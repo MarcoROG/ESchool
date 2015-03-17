@@ -19,5 +19,11 @@
 .success {
   background-color: lawngreen; }
 
-.dismisser {
+.eventful, .dismisser {
+  color: #000000;
   cursor: pointer; }
+
+.eventful:hover, .dismisser:hover {
+  color: #039BE5;
+  cursor: pointer; }
+

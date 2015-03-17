@@ -2,22 +2,21 @@
 
 @section('content')
     @include('partials.messages')
-    @forelse($users as $u)
-        <div class="card-panel">
-            {{$u->name}}
-        </div>
-    @empty
-        <div class="card-panel">
-            Non è stato trovato nessun utente.
-        </div>
-    @endforelse
-    @if(Auth::user() instanceof \App\Users\Secretary)
+    @include('partials.userlist')
+    @if(Auth::user()->is('secretary'))
         <div class="row">
-            <div class="col offset-s9 s3">
-                <a href="{{action('UserController@showSubscriptionInterface')}}"
-                   class="btn-large waves-effect waves-light">
+            <div class="col s5">
+                <a href="{{url('users/unapproved')}}"
+                   class="btn waves-effect waves-light">
+                    <i class="mdi-action-search medium left"></i>
+                    Visualizza utenti da approvare
+                </a>
+            </div>
+            <div class="col offset-s4 s3">
+                <a href="{{url('users/add')}}"
+                   class="btn waves-effect waves-light">
                     <i class="mdi-content-add-box medium right"></i>
-                    Aggiungi utenti
+                    Aggiungi
                 </a>
             </div>
         </div>

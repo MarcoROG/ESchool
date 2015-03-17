@@ -22,10 +22,12 @@ Route::get('/','HomeController@index');
 Route::get('/home','HomeController@authenticatedIndex');
 
 Route::group(['prefix'=>'users'],function(){
-    Route::get('/','UserController@showAll');
+    Route::get('/','UserController@getAll');
     Route::post('/','UserController@register');
-    Route::get('add',['can'=>'add.user', //TODO Riattivare il controllo nel middleware
-        'uses'=>'UserController@showSubscriptionInterface']);
-    Route::get('{id}','UserController@showUser');
-    Route::get('verify/{token}','UserController@verifyUser');
+    Route::get('add',['can'=>'add.user',
+        'uses'=>'UserController@getSubscriptionInterface']);
+    Route::get('unapproved','UserController@getApprove');
+    Route::get('{id}/profile','UserController@getUser');
+    Route::patch('{token}/verify','UserController@verifyUser');
+    Route::patch('{token}/approve','UserController@approveUser');
 });

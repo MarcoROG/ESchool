@@ -6,6 +6,7 @@ $(document).ready(function(){
         $('.modal').openModal();
     }
     $('select').material_select();
+    $('.tooltipped').tooltip({delay: 50});
 });
 $('.dismisser').click(function(){
     $(this).closest("div.dismissable").hide("slow");

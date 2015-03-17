@@ -23,6 +23,15 @@
   background-color: lawngreen;
 }
 
-.dismisser{
+.eventful{
+  color: #000000;
   cursor: pointer;
+}
+.eventful:hover{
+  color: #039BE5;
+  cursor: pointer;
+}
+
+.dismisser{
+  @extend .eventful
 }

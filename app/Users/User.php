@@ -7,6 +7,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Lang;
 use Kodeine\Acl\Traits\HasRole;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
@@ -26,7 +27,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 * @var array
 	 */
 	protected $fillable = ['name','middle_name','surname','birth_day','birth_place','catholic','gender',
-		'address','email','telephone','mobile', 'password','verify_token','verified'];
+		'address','email','telephone','mobile', 'password','token','approved'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -59,4 +60,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function setBirthDayAttribute($value){
         $this->attributes['birth_day']= Carbon::createFromFormat('d/m/Y',$value);
     }
+    public function fullName(){
+        $full=$this->name. ' ';
+        if($this->middle_name)$full.=$this->middle_name . ' ';
+        $full.=$this->surname;
+        return $full;
+    }
+
+    public function getBirthday(){
+        return $this->birth_day->day.' '
+        .strtolower(Lang::get('dates.month.'.$this->birth_day->month));
+    }
+
 }

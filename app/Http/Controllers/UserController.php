@@ -6,6 +6,7 @@ use App\Http\Requests\AddUserRequest;
 use App\Users\User;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers as AuthenticatesAndRegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Kodeine\Acl\Models\Eloquent\Role;
 use Laracasts\Flash\Flash;
 
@@ -22,8 +23,9 @@ class UserController extends Controller {
      * Shows all the users, better to use when queried
      * @return $this
      */
-    public function showAll(){
-        return view('users.all')->with('users',User::all());
+    public function getAll(){
+        return view('users.all')->with('users',
+            User::where('approved','=',true));
 	}
 
     /**
@@ -32,7 +34,7 @@ class UserController extends Controller {
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function register(AddUserRequest $request){
-        $request['verified']=true;
+        $request['approved']=true;
         if($this->dispatch(new CreateUserCommand($request->all()))){
             Flash::success('Utente registrato correttamente.');
         }else {
@@ -46,7 +48,7 @@ class UserController extends Controller {
      * Shows to secretaries the interface for registering an user
      * @return \Illuminate\View\View
      */
-    public function showSubscriptionInterface(){
+    public function getSubscriptionInterface(){
         return view('users.add')
             ->with('roles',Role::all())
             ->with('mode','secretary');
@@ -56,16 +58,19 @@ class UserController extends Controller {
      * Shows all the info for an user
      * @param $id
      */
-    public function showUser($id){
-
+    public function getUser($id){
+        $user = User::findOrFail($id);
+        if(!$user['approved'])Flash::warning('Questo utente non è ancora stato approvato!');
+        return view('users.user')->with('user', $user);
     }
 
     /**
      * Validates an user using his token
      * @param $token
+     * @return Redirect
      */
     public static function verifyUser($token){
-        $user=User::onlyTrashed()->where('verify_token',$token)->first();
+        $user=User::onlyTrashed()->where('token',$token)->first();
         if($user){
             $user->restore();
             if(!Auth::user()) Auth::login($user);
@@ -73,6 +78,24 @@ class UserController extends Controller {
             return redirect(url('home'));
         }
         Flash::error('Impossibile attivare l\'account specificato.');
-        return redirect(url('landing'));
+        return redirect(url(''));
+    }
+
+
+    /**
+     * Approves an user
+     * @param $token
+     */
+    public static function approveUser($token){
+        $user = User::with('token','=',$token)->firstOrFail();
+    }
+
+    /**
+     * Shows all the users that need to be approved
+     * @return $this
+     */
+    public function getApprove(){
+        return view('users.approve')->with('users',
+            User::where('approved','=',false)->get());
     }
 }
