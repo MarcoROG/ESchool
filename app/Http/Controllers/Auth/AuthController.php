@@ -3,6 +3,7 @@
 use App\Commands\CreateUserCommand;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddUserRequest;
+use App\Users\User;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers as AutheenticatesAndRegistersUsers;
@@ -56,12 +57,17 @@ class AuthController extends Controller {
             $credentials = $request->only('email', 'password');
             if ($this->auth->attempt($credentials, $request->has('remember'))) {
                     Flash::warning('Il tuo account non è attivato!<br> Controlla la tua casella email e cerca la nostra email di iscrizione per attivarlo.');
-                    $this->auth->user()->approved?true:Flash::warning('Il tuo account non è ancora stato approvato!<br>
+                    $this->auth->user()->approved?:Flash::warning('Il tuo account non è ancora stato approvato!<br>
                                                                     Perfavore attendi che qualcuno della segreteria prenda in carico la richiesta.');
                 return redirect()->intended($this->redirectPath());
             }
-            Flash::error('Questi dati non corrispondono a nessun account!<br>
-                        Controlla che i dati immessi siano esatti e di aver attivato l\'account dalla tua email');
+            if(User::onlyTrashed()->where('email','=',$request['email'])->count() ){
+                Flash::warning('Questi account non è attivo!<br>
+                        Cerca nella tua casella email la mail di registrazione, e clicca \'Attiva\'!');
+            }else{
+                Flash::error('Questi dati non corrispondono a nessun account!<br>
+                        Controlla che i dati immessi siano esatti!');
+            }
         }else {
             Flash::warning($validator->errors()->first());
         }
