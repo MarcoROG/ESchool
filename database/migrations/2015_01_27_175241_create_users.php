@@ -34,6 +34,7 @@ class CreateUsers extends Migration
             //Account information
             $table->string('password');
             $table->string('token')->nullable()->unique();
+            $table->string('remember_token')->nullable();
             $table->boolean('approved')->default(false);
             $table->timestamps();
             $table->softDeletes();

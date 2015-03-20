@@ -88,6 +88,7 @@ class UserController extends Controller {
      */
     public static function approveUser($token){
         $user = User::with('token','=',$token)->firstOrFail();
+        //TODO: approve logic
     }
 
     /**

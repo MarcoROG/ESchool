@@ -1,4 +1,4 @@
-@include('parents.master')
+@extends('parents.master')
 
 @section('content')
     @include('partials.messages')

@@ -54,12 +54,14 @@ class AuthController extends Controller {
         ]);
         if($validator->passes()) {
             $credentials = $request->only('email', 'password');
-
             if ($this->auth->attempt($credentials, $request->has('remember'))) {
+                    Flash::warning('Il tuo account non è attivato!<br> Controlla la tua casella email e cerca la nostra email di iscrizione per attivarlo.');
+                    $this->auth->user()->approved?true:Flash::warning('Il tuo account non è ancora stato approvato!<br>
+                                                                    Perfavore attendi che qualcuno della segreteria prenda in carico la richiesta.');
                 return redirect()->intended($this->redirectPath());
             }
-
-            Flash::error('Questi dati non corrispondono a nessun account!');
+            Flash::error('Questi dati non corrispondono a nessun account!<br>
+                        Controlla che i dati immessi siano esatti e di aver attivato l\'account dalla tua email');
         }else {
             Flash::warning($validator->errors()->first());
         }

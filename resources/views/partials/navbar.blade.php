@@ -13,7 +13,11 @@
                         <a href="{{url('users')}}"><li>Utenti</li></a>
                         <a href="#"><li>Voce 2</li></a>
                         <a href="#"><li>Voce 3</li></a>
-                        <a href="{{url('/auth/login')}}"><li>Accedi</li></a>
+                        @if(Auth::Check())
+                            <a href="{{url('/auth/logout')}}"><li>Logout</li></a>
+                        @else
+                            <a href="{{url('/auth/login')}}"><li>Accedi</li></a>
+                        @endif
                     </ul>
                 </div>
             </nav>
