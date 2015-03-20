@@ -93,7 +93,7 @@ class UserController extends Controller {
             $user->approved = true;
             if($user->save()) {
                 Flash::success('Utente attivato con successo!');
-                return redirect()->back();
+                return redirect(url('users/unapproved'));
             }
         }
         Flash::error('Impossibile attivare l\' utente.');
