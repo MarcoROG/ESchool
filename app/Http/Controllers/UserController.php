@@ -25,7 +25,7 @@ class UserController extends Controller {
      */
     public function getAll(){
         return view('users.all')->with('users',
-            User::where('approved','=',true));
+            User::where('approved','=',true)->get());
 	}
 
     /**
@@ -85,17 +85,26 @@ class UserController extends Controller {
     /**
      * Approves an user
      * @param $token
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public static function approveUser($token){
-        $user = User::with('token','=',$token)->firstOrFail();
-        //TODO: approve logic
+    public function approveUser($token){
+        $user = User::where('token','=',$token)->firstOrFail();
+        if($user) {
+            $user->approved = true;
+            if($user->save()) {
+                Flash::success('Utente attivato con successo!');
+                return redirect()->back();
+            }
+        }
+        Flash::error('Impossibile attivare l\' utente.');
+        return redirect()->back();
     }
 
     /**
      * Shows all the users that need to be approved
      * @return $this
      */
-    public function getApprove(){
+    public function getUnapproved(){
         return view('users.approve')->with('users',
             User::where('approved','=',false)->get());
     }

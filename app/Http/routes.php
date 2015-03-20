@@ -24,9 +24,8 @@ Route::get('/home','HomeController@authenticatedIndex');
 Route::group(['prefix'=>'users'],function(){
     Route::get('/','UserController@getAll');
     Route::post('/','UserController@register');
-    Route::get('add',['can'=>'add.user',
-        'uses'=>'UserController@getSubscriptionInterface']);
-    Route::get('unapproved','UserController@getApprove');
+    Route::get('add','UserController@getSubscriptionInterface');
+    Route::get('unapproved','UserController@getUnapproved');
     Route::get('{id}/profile','UserController@getUser');
     Route::patch('{token}/verify','UserController@verifyUser');
     Route::patch('{token}/approve','UserController@approveUser');

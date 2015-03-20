@@ -15,12 +15,16 @@
                 </a>
             </div>
             @if(Auth::user()->is('secretary') and !$user->approved)
-            <div class="col s1">
-                <a href="{{url('users/'.$user->token.'/approve')}}">
-                <i class="mdi-action-done small tooltipped eventful"
-                   data-position="top" data-delay="50" data-tooltip="Approva utente"></i>
-                </a>
-            </div>
+            <form id="activate" role="form" method="POST" action="{{url('users/'.$user->token.'/approve')}}">
+                <input type="hidden" name="_method" value="patch">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
+                <div class="col s1">
+                    <a href="#" onclick="document.getElementById('activate').submit()">
+                    <i class="mdi-action-done small tooltipped eventful"
+                       data-position="top" data-delay="50" data-tooltip="Approva utente"></i>
+                    </a>
+                </div>
+            </form>
             @endif
         </div>
         @include('partials.messages')

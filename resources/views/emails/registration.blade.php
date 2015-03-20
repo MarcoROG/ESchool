@@ -13,8 +13,9 @@
 </head>
 <body>
 <div class="container">
-    <form class="form-horizontal" role="form" method="POST" action="/auth/register">
+    <form class="form-horizontal" role="form" method="POST" action="{{url('users/'.$token.'/verify')}}">
         <input type="hidden" name="_method" value="patch">
+        <input type="hidden" name="_token" value="{{csrf_token()}}">
         <div class="row">
             <div class="col s10 offset-s1 " align="center">
                 Sei ora registrato al sito per la didattica digitale della tua scuola! <br>
@@ -22,7 +23,9 @@
             </div>
         </div>
         <div class="row">
-            <a href="{{url('users/'.$token.'/verify')}}" class="col s4 offset-s4 center-align btn waves-effect waves-light"><i class="mdi-action-launch right"></i> Attiva il tuo account!</a>
+            <button type="submit" name="action" class="col s4 offset-s4 center-align btn waves-effect waves-light">
+                <i class="mdi-action-launch right"></i> Attiva il tuo account!
+            </button>
         </div>
     </form>
 </div>
