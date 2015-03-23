@@ -3,10 +3,12 @@
 use App\Commands\CreateUserCommand;
 use App\Http\Requests;
 use App\Http\Requests\AddUserRequest;
+use App\Http\Requests\EditUserRequest;
 use App\Users\User;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers as AuthenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 use Kodeine\Acl\Models\Eloquent\Role;
 use Laracasts\Flash\Flash;
 
@@ -54,6 +56,44 @@ class UserController extends Controller {
             ->with('mode','secretary');
     }
 
+    /**
+     * Returns the view to edit the user
+     * @param $id
+     * @return $this
+     */
+    public function getEditUser($id){
+        $user=User::find($id);
+        if(!$user){
+            Flash::error('Impossibile trovare l\'utente specificato');
+            return redirect()->back();
+        }
+        return view('users.edit')->with('user',$user)
+            ->with('mode',Auth::user()->id==$user->id?'auto':'secretary');
+    }
+
+
+    /**
+     * Edits an user
+     * @param $token
+     * @param EditUserRequest $request
+     * @return Redirect
+     */
+    public function editUser($token,EditUserRequest $request){
+        $user=User::where('token','=',$token)->first();
+
+        if(!$user){
+            Flash::error('Impossibile trovare l\'utente specificato');
+            return redirect()->back();
+        }
+        $data=$request->except('password','_token','_method','action');
+        $data['catholic']=isset($request['catholic']);
+        $user->fill($data);
+        if($request->has('password')){
+            $user->password=$request['password'];
+        }
+        $user->save();
+        return redirect('users/'.$user->id.'/profile');
+    }
     /**
      * Shows all the info for an user
      * @param $id

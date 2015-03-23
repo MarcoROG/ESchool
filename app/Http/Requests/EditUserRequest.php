@@ -1,9 +1,9 @@
 <?php namespace App\Http\Requests;
 
-use Carbon\Carbon;
 use App\Http\Requests\Request;
+use Carbon\Carbon;
 
-class AddUserRequest extends Request {
+class EditUserRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -12,7 +12,7 @@ class AddUserRequest extends Request {
 	 */
 	public function authorize()
 	{
-		//return Auth::user()->can('add.user');
+        //return (Auth::user()->can('edit.user')||Auth::user()->id==$this['id']);
         return true;
 	}
 
@@ -31,12 +31,11 @@ class AddUserRequest extends Request {
             'birth_place'=>'required|string|max:255',
             'gender'=>'required|string|max:1',
             'address'=>'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'role'=>'required|in:student,foreign,teacher,technician,secretary,ata,student',
+            'email' => 'required|email|max:255',
             'telephone' => 'required|alpha_num|max:255',
             'mobile'=> 'alpha_num|max:255',
             'password'=>'sometimes|confirmed|min:6|max:255'
-		];
+        ];
 	}
 
 }

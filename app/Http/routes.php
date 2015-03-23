@@ -27,6 +27,8 @@ Route::group(['prefix'=>'users'],function(){
     Route::get('add','UserController@getSubscriptionInterface');
     Route::get('unapproved','UserController@getUnapproved');
     Route::get('{id}/profile','UserController@getUser');
+    Route::get('{id}/edit','UserController@getEditUser');
+    Route::patch('{token}/edit','UserController@editUser');
     Route::patch('{token}/verify','UserController@verifyUser');
     Route::patch('{token}/approve','UserController@approveUser');
 });
