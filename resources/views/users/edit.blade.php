@@ -18,19 +18,19 @@
                 {{--Nome--}}
                 <div class="input-field col s5 offset-s1">
                     <i class="mdi-social-person prefix"></i>
-                    <input type="text" name="name" id="name" maxlength="30" class="validate" value="{{old('name')?old('name'):$user->name }}">
+                    <input type="text" name="name" id="name" maxlength="30" class="validate" value="{{old('name',$user->name)}}">
                     <label for="name">Nome</label>
                 </div>
                 {{--Secondo nome--}}
                 <div class="input-field col s5 ">
                     <i class="mdi-social-person prefix"></i>
-                    <input type="text" name="middle_name" id="middle_name" maxlength="30" class="validate" value="{{old('middle_name')?old('middle_name'):$user->middle_name }}">
+                    <input type="text" name="middle_name" id="middle_name" maxlength="30" class="validate" value="{{old('middle_name',$user->middle_name)}}">
                     <label for="middle_name">Secondo nome</label>
                 </div>
                 {{--Cognome--}}
                 <div class="input-field col s5 offset-s1">
                     <i class="mdi-social-person prefix"></i>
-                    <input type="text" name="surname" id="surname" maxlength="30" class="validate" value="{{old('surname')?old('surname'):$user->surname }}">
+                    <input type="text" name="surname" id="surname" maxlength="30" class="validate" value="{{old('surname',$user->surname)}}">
                     <label for="surname">Cognome</label>
                 </div>
             </div>
@@ -39,13 +39,13 @@
                 {{--Data di nascita--}}
                 <div class="input-field col s5 offset-s1">
                     <i class="mdi-action-event prefix"></i>
-                    <input type="text" class="datepicker picker__input" name="birth_day" id="birth_day" value="{{old('birth_day')?old('birth_day'):$user->birth_day }}">
+                    <input type="text" class="datepicker picker__input" name="birth_day" id="birth_day" value="{{old('birth_day',$user->getBirthday()) }}">
                     <label for="birth_day">Giorno di nascita</label>
                 </div>
                 {{--Luogo di nascita--}}
                 <div class="input-field col s5 ">
                     <i class="mdi-social-location-city prefix"></i>
-                    <input type="text"  name="birth_place" id="birth_place" value="{{old('birt_place')?old('birth_place'):$user->birth_place }}">
+                    <input type="text"  name="birth_place" id="birth_place" value="{{old('birth_place',$user->birth_place)}}">
                     <label for="birth_place">Luogo di nascita</label>
                 </div>
             </div>
@@ -56,11 +56,11 @@
                 </div>
                 <div class="input-field col s3 offset-s1">
 
-                    <input type="radio" name="gender" id="Male" value="M" <?php $g=old('gender')?old('gender'):$user->gender; if($g=="M"){echo 'checked="checked"';} ?>>
+                    <input type="radio" name="gender" id="Male" value="M" <?php if(old('gender',$user->gender)=="M"){echo 'checked="checked"';} ?>>
                     <label for="Male">Maschio</label>
                 </div>
                 <div class="input-field col s3 offset-s1">
-                    <input type="radio" name="gender" id="Female" value="F" <?php $g=old('gender')?old('gender'):$user->gender; if($g=="F"){echo 'checked="checked"';} ?>>
+                    <input type="radio" name="gender" id="Female" value="F" <?php if(old('gender',$user->gender)=="F"){echo 'checked="checked"';} ?>>
                     <label for="Female">Femmina</label>
                 </div>
             </div><br>
@@ -84,13 +84,13 @@
                 {{--Indirizzo--}}
                 <div class="input-field col offset-s1 s10">
                     <i class="mdi-action-home prefix"></i>
-                    <input type="text" name="address" id="address" value="{{old('address')?old('address'):$user->address }}">
+                    <input type="text" name="address" id="address" value="{{old('address',$user->address)}}">
                     <label for="address">Indirizzo</label>
                 </div>
                 {{--Email--}}
                 <div class="input-field col offset-s1 s10">
                     <i class="mdi-content-mail prefix"></i>
-                    <input type="email" name="email" id="email" class="validate" value="{{old('email')?old('email'):$user->email }}">
+                    <input type="email" name="email" id="email" class="validate" value="{{old('email',$user->email)}}">
                     <label for="email">Email</label>
                 </div>
                 @if($mode=='auto')
@@ -110,13 +110,13 @@
                 {{--Fisso--}}
                 <div class="input-field col offset-s1 s5">
                     <i class="mdi-communication-call prefix"></i>
-                    <input type="tel" name="telephone" id="telephone" class="validate" value="{{old('telephone')?old('old_telephone'):$user->telephone }}">
+                    <input type="tel" name="telephone" id="telephone" class="validate" value="{{old('telephone',$user->telephone)}}">
                     <label for="telephone">Numero di telefono domestico</label>
                 </div>
                 {{--Cellulare--}}
                 <div class="input-field col s5">
                     <i class="mdi-hardware-smartphone prefix"></i>
-                    <input type="tel" name="mobile" id="mobile" class="validate" value="{{old('mobile')?old('mobile'):$user->mobile }}">
+                    <input type="tel" name="mobile" id="mobile" class="validate" value="{{old('mobile',$user->mobile)}}">
                     <label for="mobile">Numero di telefono cellulare</label>
                 </div>
             </div>

@@ -1,5 +1,6 @@
 <?php namespace App\Users;
 
+use App\Message;
 use Carbon\Carbon;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -41,7 +42,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $dates = array('birth_day');
+    protected $dates = ['birth_day'];
 
 	/**
 	 * All the messages sent by the user.
@@ -58,8 +59,13 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @param $value
      */
     public function setBirthDayAttribute($value){
-        $this->attributes['birth_day']= Carbon::createFromFormat('d/m/Y',$value);
+        $this->attributes['birth_day']= Carbon::parse($value);
     }
+
+    /**
+     * Returns the full name of the user
+     * @return string
+     */
     public function fullName(){
         $full=$this->name. ' ';
         if($this->middle_name)$full.=$this->middle_name . ' ';
@@ -67,7 +73,20 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $full;
     }
 
+    /**
+     * Returns the day in which the user was born
+     * @return Carbon
+     */
     public function getBirthday(){
+        
+        return $this->birth_day->format('d/m/Y');
+    }
+
+    /**
+     * Returns the birthday of the user
+     * @return string
+     */
+    public function getRecurrentBirthday(){
         return $this->birth_day->day.' '
         .strtolower(Lang::get('dates.month.'.$this->birth_day->month));
     }

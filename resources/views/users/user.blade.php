@@ -41,7 +41,7 @@
                 <i class="mdi-social-cake small"></i>
             </div>
             <div class="col s9 valign">
-                <p class="valign">{{$user->getBirthday()}}</p>
+                <p class="valign">{{$user->getRecurrentBirthday()}}</p>
             </div>
         </div>
         <div class="row">
