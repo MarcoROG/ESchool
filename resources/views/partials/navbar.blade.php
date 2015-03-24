@@ -11,9 +11,9 @@
                     </a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down ">
                         <a href="{{url('users')}}"><li>Utenti</li></a>
-                        <a href="#"><li>Voce 2</li></a>
                         <a href="#"><li>Voce 3</li></a>
                         @if(Auth::Check())
+                            <a href="{{url('users/'.Auth::user()->id.'/profile')}}"><li>Profilo</li></a>
                             <a href="{{url('/auth/logout')}}"><li>Logout</li></a>
                         @else
                             <a href="{{url('/auth/login')}}"><li>Accedi</li></a>

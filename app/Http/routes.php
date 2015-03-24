@@ -30,5 +30,5 @@ Route::group(['prefix'=>'users'],function(){
     Route::get('{id}/edit','UserController@getEditUser');
     Route::patch('{token}/edit','UserController@editUser');
     Route::patch('{token}/verify','UserController@verifyUser');
-    Route::patch('{token}/approve','UserController@approveUser');
+    Route::patch('{token}/approve/{value}','UserController@approveUser');
 });

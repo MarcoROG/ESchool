@@ -78,7 +78,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @return Carbon
      */
     public function getBirthday(){
-        
         return $this->birth_day->format('d/m/Y');
     }
 
@@ -89,6 +88,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function getRecurrentBirthday(){
         return $this->birth_day->day.' '
         .strtolower(Lang::get('dates.month.'.$this->birth_day->month));
+    }
+
+    /**
+     * Approves or removes an user.
+     * @param $value
+     * @return bool|null
+     * @throws \Exception
+     */
+    public function approve($value){
+        if($value==1){
+            $this->approved=$value;
+            return $this->save();
+        }else{
+            return $this->delete();
+        }
     }
 
 }

@@ -18,6 +18,7 @@ class UserController extends Controller {
 
     function __construct(Registrar $reg)
     {
+        $this->middleware('auth');
         $this->registrar=$reg;
     }
 
@@ -127,12 +128,11 @@ class UserController extends Controller {
      * @param $token
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function approveUser($token){
+    public function approveUser($token,$value){
         $user = User::where('token','=',$token)->firstOrFail();
         if($user) {
-            $user->approved = true;
-            if($user->save()) {
-                Flash::success('Utente attivato con successo!');
+            if($user->approve($value)) {
+                Flash::success('Operazione effettuata con successo!');
                 return redirect(url('users/unapproved'));
             }
         }

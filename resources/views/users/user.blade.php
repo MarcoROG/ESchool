@@ -14,15 +14,25 @@
                    data-position="top" data-delay="50" data-tooltip="Invia un messaggio"></i>
                 </a>
             </div>
-            @if(Auth::user()->is('secretary') )
+            @if(Auth::user()->is('secretary') || Auth::user()->id==$user->id )
                 @if(!$user->approved)
-                <form id="activate" role="form" method="POST" action="{{url('users/'.$user->token.'/approve')}}">
+                <form id="approve" role="form" method="POST" action="{{url('users/'.$user->token.'/approve/1')}}">
                     <input type="hidden" name="_method" value="patch">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                     <div class="col s1">
-                        <a href="#" onclick="document.getElementById('activate').submit()">
+                        <a href="#" onclick="document.getElementById('approve').submit()">
                         <i class="mdi-action-done small tooltipped eventful"
                            data-position="top" data-delay="50" data-tooltip="Approva utente"></i>
+                        </a>
+                    </div>
+                </form>
+                <form id="unapprove" role="form" method="POST" action="{{url('users/'.$user->token.'/approve/0')}}">
+                    <input type="hidden" name="_method" value="patch">
+                    <input type="hidden" name="_token" value="{{csrf_token()}}">
+                    <div class="col s1">
+                        <a href="#" onclick="document.getElementById('unapprove').submit()">
+                            <i class="mdi-content-clear small tooltipped eventful"
+                                data-position="top" data-delay="50" data-tooltip="Rifiuta utente"></i>
                         </a>
                     </div>
                 </form>
