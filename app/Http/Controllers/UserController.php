@@ -95,9 +95,11 @@ class UserController extends Controller {
         $user->save();
         return redirect('users/'.$user->id.'/profile');
     }
+
     /**
      * Shows all the info for an user
      * @param $id
+     * @return $this
      */
     public function getUser($id){
         $user = User::findOrFail($id);
@@ -122,11 +124,11 @@ class UserController extends Controller {
         return redirect(url(''));
     }
 
-
     /**
      * Approves an user
      * @param $token
-     * @return \Illuminate\Http\RedirectResponse
+     * @param $value
+     * @return Redirect
      */
     public function approveUser($token,$value){
         $user = User::where('token','=',$token)->firstOrFail();

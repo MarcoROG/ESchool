@@ -23,7 +23,7 @@ class UserPermissionSeeder extends Seeder {
             'slug' => [
                 'create' => false,
                 'view' => true,
-                'update' => false,
+                'edit' => false,
                 'approve' => false,
                 'delete' => false,
             ],
@@ -33,13 +33,21 @@ class UserPermissionSeeder extends Seeder {
             'name' => 'users.secretary',
             'slug' => [
                 'create' => true,
-                'update' => true,
+                'edit' => true,
                 'approve' => true,
                 'delete' => true,
             ],
             'inherit_id' => $genericUser->getKey(),
             'description' => 'secretary permission regarding users'
         ]);
+        $roles=Role::all();
+        foreach($roles as $r){
+            if($r->slug=='secretary'){
+                $r->assignPermission('users.secretary');
+            }else{
+                $r->assignPermission('users');
+            }
+        }
     }
 
 }

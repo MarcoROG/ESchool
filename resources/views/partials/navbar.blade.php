@@ -10,9 +10,12 @@
                     @endif
                     </a>
                     <ul id="nav-mobile" class="right hide-on-med-and-down ">
-                        <a href="{{url('users')}}"><li>Utenti</li></a>
-                        <a href="#"><li>Voce 3</li></a>
                         @if(Auth::Check())
+                            @foreach(Auth::user()->getPermissions() as $d=>$p)
+                                @if(Auth::user()->can('view.'.$d))
+                                    <a href="{{url($d)}}"><li>{{Lang::get('resources.'.$d)}}</li></a>
+                                @endif
+                            @endforeach
                             <a href="{{url('users/'.Auth::user()->id.'/profile')}}"><li>Profilo</li></a>
                             <a href="{{url('/auth/logout')}}"><li>Logout</li></a>
                         @else

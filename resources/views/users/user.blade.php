@@ -14,8 +14,7 @@
                    data-position="top" data-delay="50" data-tooltip="Invia un messaggio"></i>
                 </a>
             </div>
-            @if(Auth::user()->is('secretary') || Auth::user()->id==$user->id )
-                @if(!$user->approved)
+            @if(!$user->approved && Auth::user()->can('approve.users'))
                 <form id="approve" role="form" method="POST" action="{{url('users/'.$user->token.'/approve/1')}}">
                     <input type="hidden" name="_method" value="patch">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -36,7 +35,8 @@
                         </a>
                     </div>
                 </form>
-                @endif
+            @endif
+            @if(Auth::user()->can('edit.users') || Auth::user()->id==$user->id )
                 <div class="col s1">
                     <a href="{{url('users/'.$user->id.'/edit')}}">
                         <i class="mdi-image-edit small tooltipped eventful"
