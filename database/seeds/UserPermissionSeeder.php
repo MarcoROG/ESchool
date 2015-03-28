@@ -15,17 +15,14 @@ class UserPermissionSeeder extends Seeder {
      */
     public function run()
     {
-        DB::statement("SET foreign_key_checks=0");
-        Permission::truncate();
-        DB::statement("SET foreign_key_checks=1");
         $genericUser=Permission::create([
             'name' => 'users',
             'slug' => [
-                //'create' => false,
+                'create' => false,
                 'view' => true,
-                //'edit' => false,
-                //'approve' => false,
-                //'delete' => false,
+                'edit' => false,
+                'approve' => false,
+                'delete' => false,
             ],
             'description' => 'generic permission regarding users'
         ]);

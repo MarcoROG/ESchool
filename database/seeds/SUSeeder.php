@@ -36,7 +36,7 @@ class SUSeeder extends Seeder {
         $u->email='mark.sg97@gmail.com';
         $u->telephone ='0331375209';
         $u->mobile = '3485783906';
-        $u->password=bcrypt('password');
+        $u->password=bcrypt('passwordss');
         $u->token= Helper::generateToken();
         $u->approved=true;
         $u->save();

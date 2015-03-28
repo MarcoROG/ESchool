@@ -14,9 +14,7 @@ class RolesSeeder extends Seeder {
      */
     public function run()
     {
-        DB::statement("SET foreign_key_checks=0");
-        Role::truncate();
-        DB::statement("SET foreign_key_checks=1");
+
         Role::create(['name'=>'Studente',
             'slug'=>'student',
             'description'=>'An user who attends standard didactic lessons.'

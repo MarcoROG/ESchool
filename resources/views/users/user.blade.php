@@ -36,6 +36,7 @@
                     </div>
                 </form>
             @endif
+
             @if(Auth::user()->can('edit.users') || Auth::user()->id==$user->id )
                 <div class="col s1">
                     <a href="{{url('users/'.$user->id.'/edit')}}">

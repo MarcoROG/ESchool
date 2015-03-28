@@ -28,9 +28,6 @@ class UsersSeeder extends Seeder {
         $places=['Olgiate Olona','Solbiate Olona','Fagnano Olona','Busto Arsizio',
         'Castano Primo','Borsano','Quarto Oggiaro'];
 
-        DB::statement("SET foreign_key_checks=0");
-        User::truncate();
-        DB::statement("SET foreign_key_checks=1");
         for($i=0;$i<25;$i++){
             $u = new User();
             $u->gender = mt_rand(0,1)==0?'M':'F';
