@@ -21,11 +21,11 @@ class UserPermissionSeeder extends Seeder {
         $genericUser=Permission::create([
             'name' => 'users',
             'slug' => [
-                'create' => false,
+                //'create' => false,
                 'view' => true,
-                'edit' => false,
-                'approve' => false,
-                'delete' => false,
+                //'edit' => false,
+                //'approve' => false,
+                //'delete' => false,
             ],
             'description' => 'generic permission regarding users'
         ]);

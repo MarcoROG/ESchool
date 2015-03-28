@@ -18,7 +18,7 @@ class UserController extends Controller {
 
     function __construct(Registrar $reg)
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
         $this->registrar=$reg;
     }
 
