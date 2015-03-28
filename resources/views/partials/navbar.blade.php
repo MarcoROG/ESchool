@@ -16,9 +16,10 @@
                                     <a href="{{url($d)}}"><li>{{Lang::get('resources.'.$d)}}</li></a>
                                 @endif
                             @endforeach
-                            <a href="{{url('users/'.Auth::user()->id.'/profile')}}"><li>Profilo</li></a>
+                            <a href="{{url('users/'.Hashids::encode(Auth::user()->id).'/profile')}}"><li>Profilo</li></a>
                             <a href="{{url('/auth/logout')}}"><li>Logout</li></a>
                         @else
+                            <a href="{{url('/auth/register')}}"><li>Registrati</li></a>
                             <a href="{{url('/auth/login')}}"><li>Accedi</li></a>
                         @endif
                     </ul>

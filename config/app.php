@@ -146,6 +146,7 @@ return [
 		'App\Providers\RouteServiceProvider',
         'Laracasts\Flash\FlashServiceProvider',
         'Kodeine\Acl\AclServiceProvider',
+        'Vinkla\Hashids\HashidsServiceProvider'
 	],
 
 	/*
@@ -176,6 +177,7 @@ return [
 		'File'      => 'Illuminate\Support\Facades\File',
         'Flash'     => 'Laracasts\Flash\Flash',
 		'Hash'      => 'Illuminate\Support\Facades\Hash',
+        'Hashids'   =>  'Vinkla\Hashids\Facades\Hashids',
 		'Input'     => 'Illuminate\Support\Facades\Input',
 		'Inspiring' => 'Illuminate\Foundation\Inspiring',
 		'Lang'      => 'Illuminate\Support\Facades\Lang',

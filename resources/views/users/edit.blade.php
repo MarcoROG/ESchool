@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="card-panel">
-        <form  role="form" method="POST" action="{{url('users/'.$user->token.'/edit')}}" >
+        <form  role="form" method="POST" action="{{url('users/'.Hashids::encode($user->id).'/edit')}}" >
             <div class="row">
                 <div class="col offset-s2 s8">
                     <h2>Modifica di un utente</h2>

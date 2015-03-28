@@ -9,13 +9,13 @@
                 <h5>{{$user->roles()->first()->name}}</h5>
             </div>
             <div class="col s1">
-                <a href="{{url('messages/'.$user->id.'/send')}}">
+                <a href="{{url('messages/'.Hashids::encode($user->id).'/send')}}">
                 <i class="mdi-content-mail small tooltipped eventful"
                    data-position="top" data-delay="50" data-tooltip="Invia un messaggio"></i>
                 </a>
             </div>
-            @if(!$user->approved && Auth::user()->can('approve.users'))
-                <form id="approve" role="form" method="POST" action="{{url('users/'.$user->token.'/approve/1')}}">
+            @if(!$user->approved && Auth::user()->can('approve.users')&& Auth::user()->id!=$user->id)
+                <form id="approve" role="form" method="POST" action="{{url('users/'.Hashids::encode($user->id).'/approve/1')}}">
                     <input type="hidden" name="_method" value="patch">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                     <div class="col s1">
@@ -25,7 +25,7 @@
                         </a>
                     </div>
                 </form>
-                <form id="unapprove" role="form" method="POST" action="{{url('users/'.$user->token.'/approve/0')}}">
+                <form id="unapprove" role="form" method="POST" action="{{url('users/'.Hashids::encode($user->id).'/approve/0')}}">
                     <input type="hidden" name="_method" value="patch">
                     <input type="hidden" name="_token" value="{{csrf_token()}}">
                     <div class="col s1">
@@ -38,7 +38,7 @@
             @endif
             @if(Auth::user()->can('edit.users') || Auth::user()->id==$user->id )
                 <div class="col s1">
-                    <a href="{{url('users/'.$user->id.'/edit')}}">
+                    <a href="{{url('users/'.Hashids::encode($user->id).'/edit')}}">
                         <i class="mdi-image-edit small tooltipped eventful"
                            data-position="top" data-delay="50" data-tooltip="Modifica utente"></i>
                     </a>

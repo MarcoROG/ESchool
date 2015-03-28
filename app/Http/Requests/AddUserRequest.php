@@ -32,7 +32,7 @@ class AddUserRequest extends Request {
             'gender'=>'required|string|max:1',
             'address'=>'required|string|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'role'=>'required|in:student,foreign,teacher,technician,secretary,ata,student',
+            'role'=>'required',
             'telephone' => 'required|alpha_num|max:255',
             'mobile'=> 'alpha_num|max:255',
             'password'=>'sometimes|confirmed|min:6|max:255'

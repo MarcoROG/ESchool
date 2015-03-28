@@ -75,11 +75,10 @@ class AuthController extends Controller {
     }
 
     public function getRegister(){
-        return view('users.add')
+        return view('auth.register')
             ->with('roles',array(
                 Role::where('slug','=','student')->first(),
-                Role::where('slug','=','extern')->first() ))
-            ->with('mode','auto');
+                Role::where('slug','=','extern')->first() ));
     }
 
     /**
@@ -97,7 +96,6 @@ class AuthController extends Controller {
         }else {
             Flash::error('Impossibile effetture la registrazione, riprova più tardi.');
         }
-
         return redirect($this->redirectPath());
     }
 

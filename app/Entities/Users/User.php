@@ -64,7 +64,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      * @param $value
      */
     public function setBirthDayAttribute($value){
-        $this->attributes['birth_day']= Carbon::parse($value);
+        $date=explode('/',$value);
+        $this->attributes['birth_day']= Carbon::createFromDate($date[2],$date[1],$date[0]);
     }
 
     /**

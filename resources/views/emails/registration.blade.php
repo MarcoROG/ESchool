@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="container">
-    <form class="form-horizontal" role="form" method="POST" action="{{url('users/'.$token.'/verify')}}">
+    <form class="form-horizontal" role="form" method="POST" action="{{url('users/'.$hash.'/verify')}}">
         <input type="hidden" name="_method" value="patch">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <div class="row">

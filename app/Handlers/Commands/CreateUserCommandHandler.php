@@ -3,6 +3,7 @@
 use App\Commands\CreateUserCommand;
 use App\Entities\Users\User;
 use Illuminate\Support\Facades\Mail;
+use Vinkla\Hashids\Facades\Hashids;
 
 class CreateUserCommandHandler {
 
@@ -17,9 +18,9 @@ class CreateUserCommandHandler {
         $user = User::create(array_except($command->data,'role'));
         if($user) {
             $user->delete();//Soft delete the user
-            $user->assignRole($command->data['role']);
+            $user->assignRole(Hashids::decode($command->data['role'])[0]);
             $mail=$user->email;
-            Mail::queue('emails.registration',['token'=>$user->verify_token], function($message) use($mail){
+            Mail::queue('emails.registration',['hash'=>Hashids::encode($user->id)], function($message) use($mail){
                 $message->from('noreply@liceotosi.va.it','Liceo Tosi');
                 $message->to($mail)->subject('Attivazione');
             });

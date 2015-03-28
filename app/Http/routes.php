@@ -26,9 +26,9 @@ Route::group(['prefix'=>'users', 'middleware'=>['auth','acl']],function(){
     Route::post('/','UserController@register');//Does this make sense? the add page is blocked and has a csrf token
     Route::get('add',['uses'=>'UserController@getSubscriptionInterface','can'=>'create.users']);
     Route::get('unapproved',['uses'=>'UserController@getUnapproved','can'=>'approve.users']);
-    Route::get('{id}/profile',['uses'=>'UserController@getUser','can'=>'view.users']);
-    Route::get('{id}/edit',['uses'=>'UserController@getEditUser','can'=>'edit.users']);
-    Route::patch('{token}/edit','UserController@editUser');
-    Route::patch('{token}/verify','UserController@verifyUser');
-    Route::patch('{token}/approve/{value}','UserController@approveUser');
+    Route::get('{hash}/profile',['uses'=>'UserController@getUser','can'=>'view.users']);
+    Route::get('{hash}/edit',['uses'=>'UserController@getEditUser','can'=>'edit.users']);
+    Route::patch('{hash}/edit','UserController@editUser');
+    Route::patch('{hash}/verify','UserController@verifyUser');
+    Route::patch('{hash}/approve/{value}','UserController@approveUser');
 });

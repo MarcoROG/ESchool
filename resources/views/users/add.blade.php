@@ -18,7 +18,7 @@
                     <select name ="role">
                         <option value="" disabled="disabled" selected="selected">Scegli un ruolo</option>
                         @foreach($roles as $role)
-                            <option value="{{$role['slug']}}">{{$role['name']}}</option>
+                            <option value="{{Hashids::encode($role['id'])}}">{{$role['name']}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -102,20 +102,6 @@
                     <input type="email" name="email" id="email" class="validate" value="{{ old('email') }}">
                     <label for="email">Email</label>
                 </div>
-                @if($mode=='auto')
-                {{--Password--}}
-                <div class="input-field col offset-s1 s10">
-                    <i class="mdi-communication-vpn-key prefix"></i>
-                    <input type="password" name="password" id="password" class="validate" >
-                    <label for="password">Password</label>
-                </div>
-                {{--Conferma password--}}
-                <div class="input-field col offset-s1 s10">
-                    <i class="mdi-communication-vpn-key prefix"></i>
-                    <input type="password" name="password_confirmation" id="password_confirmation" class="validate">
-                    <label for="password_confirmation">Conferma password</label>
-                </div>
-                @endif
                 {{--Fisso--}}
                 <div class="input-field col offset-s1 s5">
                     <i class="mdi-communication-call prefix"></i>
