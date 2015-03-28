@@ -39,7 +39,7 @@
                 {{--Data di nascita--}}
                 <div class="input-field col s5 offset-s1">
                     <i class="mdi-action-event prefix"></i>
-                    <input type="text" class="datepicker picker__input" name="birth_day" id="birth_day" value="{{old('birth_day',$user->getBirthday()) }}">
+                    <input type="text" class="datepicker picker__input" name="birth_day" id="birth_day" value="{{old('birth_day',$user->present()->birthday) }}">
                     <label for="birth_day">Giorno di nascita</label>
                 </div>
                 {{--Luogo di nascita--}}

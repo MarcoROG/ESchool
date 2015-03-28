@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -40,7 +40,7 @@ class Classroom extends Model {
      * @relationship one-many
      * @return Conference[]
      */
-    public function conferecesHeldHere(){
+    public function conferencesHeldHere(){
         return $this->hasMany(Conference::class,'classroom');
     }
 }

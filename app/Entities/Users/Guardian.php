@@ -6,10 +6,11 @@
  * Time: 17:15
  */
 
-namespace App\Users;
+namespace App\Entities\Users;
 
 
-use App\Users\Traits\JustifiesAbsences;
+use App\Entities\SchoolTrip;
+use App\Entities\Users\Traits\JustifiesAbsences;
 
 class Guardian extends User {
     use JustifiesAbsences

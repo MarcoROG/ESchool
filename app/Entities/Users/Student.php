@@ -1,7 +1,10 @@
-<?php namespace App\Users;
-use App\Users\Traits\JustifiesAbsences;
-use App\Users\Traits\MakesConferences;
-use App\Users\Traits\TakesClasses;
+<?php namespace App\Entities\Users;
+use App\Entities\Users\Traits\TakesClasses;
+use App\Entities\Users\Traits\MakesConferences;
+use App\Entities\Users\Traits\JustifiesAbsences;
+use App\Entities\Absence;
+use App\Entities\Test;
+
 
 /**
  * Created by PhpStorm.

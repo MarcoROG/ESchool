@@ -1,6 +1,8 @@
-<?php namespace App\Users;
+<?php namespace App\Entities\Users;
 
-use App\Message;
+
+use App\Entities\Message;
+use App\Presenters\Presentable;
 use Carbon\Carbon;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
@@ -8,12 +10,13 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Lang;
 use Kodeine\Acl\Traits\HasRole;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract {
 
-	use Authenticatable, CanResetPassword, HasRole,SoftDeletes;
+	use Authenticatable, CanResetPassword, HasRole,SoftDeletes, Presentable;
 
 	/**
 	 * The database table used by the model.
@@ -44,6 +47,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     protected $dates = ['birth_day'];
 
+    protected $presenter = \App\Presenters\Entities\User::class;
+
 	/**
 	 * All the messages sent by the user.
 	 * @access public
@@ -60,34 +65,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      */
     public function setBirthDayAttribute($value){
         $this->attributes['birth_day']= Carbon::parse($value);
-    }
-
-    /**
-     * Returns the full name of the user
-     * @return string
-     */
-    public function fullName(){
-        $full=$this->name. ' ';
-        if($this->middle_name)$full.=$this->middle_name . ' ';
-        $full.=$this->surname;
-        return $full;
-    }
-
-    /**
-     * Returns the day in which the user was born
-     * @return Carbon
-     */
-    public function getBirthday(){
-        return $this->birth_day->format('d/m/Y');
-    }
-
-    /**
-     * Returns the birthday of the user
-     * @return string
-     */
-    public function getRecurrentBirthday(){
-        return $this->birth_day->day.' '
-        .strtolower(Lang::get('dates.month.'.$this->birth_day->month));
     }
 
     /**

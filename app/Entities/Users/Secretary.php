@@ -6,7 +6,7 @@
  * Time: 17:13
  */
 
-namespace App\Users;
+namespace App\Entities\Users;
 
 
 class Secretary extends User{

@@ -1,4 +1,6 @@
-<?php namespace App\Users\Traits;
+<?php namespace App\Entities\Users\Traits;
+use App\Entities\Course;
+
 /**
  * Created by PhpStorm.
  * User: marcobellan
@@ -6,7 +8,7 @@
  * Time: 18:35
  */
 
-use \App\Users;
+
 
 
 

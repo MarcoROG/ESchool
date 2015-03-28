@@ -5,7 +5,7 @@
     <div class="card-panel z-depth-2">
         <div class="row">
             <div class="col offset-s1 s7">
-                <h3>{{$user->fullName()}}</h3><i class=""></i> <br>
+                <h3>{{$user->present()->full_name}}</h3><i class=""></i> <br>
                 <h5>{{$user->roles()->first()->name}}</h5>
             </div>
             <div class="col s1">
@@ -36,7 +36,6 @@
                     </div>
                 </form>
             @endif
-
             @if(Auth::user()->can('edit.users') || Auth::user()->id==$user->id )
                 <div class="col s1">
                     <a href="{{url('users/'.$user->id.'/edit')}}">
@@ -52,7 +51,7 @@
                 <i class="mdi-social-cake small"></i>
             </div>
             <div class="col s9 valign">
-                <p class="valign">{{$user->getRecurrentBirthday()}}</p>
+                <p class="valign">{{$user->present()->recurrent_birthday}}</p>
             </div>
         </div>
         <div class="row">

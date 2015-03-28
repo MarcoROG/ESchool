@@ -1,5 +1,6 @@
-<?php namespace App;
+<?php namespace App\Entities;
 
+use App\Entities\Users\Guardian;
 use Illuminate\Database\Eloquent\Model;
 
 class SchoolTrip extends Model {

@@ -6,17 +6,18 @@
  * Time: 21:00
  */
 
-namespace App\Users\Traits;
+namespace App\Entities\Users\Traits;
 
 
-use App\Absence;
+
+use App\Entities\Absence;
 
 trait JustifiesAbsences {
     /**
      * Returns all the absences justified by the user.
      * @access public
      * @relationship one-many
-     * @return Absence[]<
+     * @return Absence[]
      */
     public function justifiedAbsences(){
         return $this->hasMany(Absence::class,'tutor');

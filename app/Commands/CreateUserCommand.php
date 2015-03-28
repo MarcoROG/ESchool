@@ -1,9 +1,8 @@
 <?php namespace App\Commands;
 
-use App\Commands\Command;
-use App\Http\Requests\AddUserRequest;
+
 use App\Services\Helper;
-use Illuminate\Database\Eloquent\Collection;
+
 
 
 class CreateUserCommand extends Command {

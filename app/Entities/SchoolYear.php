@@ -1,4 +1,4 @@
-<?php namespace App;
+<?php namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,9 +21,9 @@ class SchoolYear extends Model {
 
     /**
      * Returns all the classes that exist in that school year.
-     * @acces public
+     * @access public
      * @relationship one-many
-     * @return Class[]
+     * @return Course[]
      */
     public function classesOfThisYear(){
         return $this->hasMany(Course::class,'schoolyear');

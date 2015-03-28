@@ -1,5 +1,6 @@
-<?php namespace App;
+<?php namespace App\Entities;
 
+use App\Entities\Users\Teacher;
 use Illuminate\Database\Eloquent\Model;
 
 class Subject extends Model {

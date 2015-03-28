@@ -4,7 +4,7 @@ use App\Commands\CreateUserCommand;
 use App\Http\Requests;
 use App\Http\Requests\AddUserRequest;
 use App\Http\Requests\EditUserRequest;
-use App\Users\User;
+use App\Entities\Users\User;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers as AuthenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Auth;
@@ -14,7 +14,7 @@ use Laracasts\Flash\Flash;
 
 class UserController extends Controller {
     use AuthenticatesAndRegistersUsers;
-    //TODO : access management
+
 
     function __construct(Registrar $reg)
     {

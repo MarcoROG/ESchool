@@ -8,11 +8,16 @@
 
 
 
-namespace App\Users;
+namespace App\Entities\Users;
 
+
+use App\Entities\Lesson;
+use App\Entities\Subject;
+use App\Entities\Users\Traits\MakesConferences;
+use App\Entities\Users\Traits\TakesClasses;
 
 class Teacher extends User {
-    use \TakesClasses , \MakesConferences;
+    use TakesClasses , MakesConferences;
 
     /**
      * Subjects taught by a teacher.

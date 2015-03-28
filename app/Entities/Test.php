@@ -1,5 +1,6 @@
-<?php namespace App;
+<?php namespace App\Entities;
 
+use App\Entities\Users\Student;
 use Illuminate\Database\Eloquent\Model;
 
 class Test extends Model {

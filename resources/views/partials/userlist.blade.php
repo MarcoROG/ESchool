@@ -1,7 +1,7 @@
 @forelse($users as $u)
     <a href="{{url('users/'.$u->id.'/profile')}}">
         <div class="card-panel">
-            {{$u->fullName()}}
+            {{$u->present()->full_name}}
         </div>
     </a>
 @empty

@@ -42,6 +42,7 @@ class Handler extends ExceptionHandler {
 		{
             return $this->renderHttpException($e);
 		}
+
 		return parent::render($request, $e);
 
 	}

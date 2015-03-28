@@ -1,8 +1,7 @@
 <?php namespace App\Handlers\Commands;
 
 use App\Commands\CreateUserCommand;
-use App\Users\User;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Entities\Users\User;
 use Illuminate\Support\Facades\Mail;
 
 class CreateUserCommandHandler {
@@ -24,7 +23,9 @@ class CreateUserCommandHandler {
                 $message->from('noreply@liceotosi.va.it','Liceo Tosi');
                 $message->to($mail)->subject('Attivazione');
             });
+            return $user;
         }
-        return $user;
+
+        return false;
 	}
 }

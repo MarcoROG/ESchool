@@ -1,5 +1,6 @@
-<?php namespace App;
+<?php namespace App\Entities;
 
+use App\Entities\Users\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 

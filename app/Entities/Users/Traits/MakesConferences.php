@@ -1,12 +1,11 @@
-<?php namespace App\Users\Traits;
+<?php namespace App\Entities\Users\Traits;
 /**
  * Created by PhpStorm.
  * User: marcobellan
  * Date: 11/02/15
  * Time: 15:49
  */
-use App\Conference;
-use App\Users;
+use App\Entities\Conference;
 trait MakesConferences {
     /**
      * Returns the conferences followed by an user.

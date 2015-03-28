@@ -3,10 +3,10 @@
 use App\Commands\CreateUserCommand;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddUserRequest;
-use App\Users\User;
+use App\Entities\Users\User;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers as AutheenticatesAndRegistersUsers;
+use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers as AuthenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Validator;
 use Kodeine\Acl\Models\Eloquent\Role;
 use Laracasts\Flash\Flash;
@@ -25,14 +25,14 @@ class AuthController extends Controller {
 	|
 	*/
 
-	use AutheenticatesAndRegistersUsers;
+	use AuthenticatesAndRegistersUsers;
 
 	/**
 	 * Create a new authentication controller instance.
 	 *
 	 * @param  \Illuminate\Contracts\Auth\Guard  $auth
 	 * @param  \Illuminate\Contracts\Auth\Registrar  $registrar
-	 * @return void
+	 *
 	 */
 	public function __construct(Guard $auth, Registrar $registrar)
 	{

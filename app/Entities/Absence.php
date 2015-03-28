@@ -1,5 +1,7 @@
-<?php namespace App;
+<?php namespace App\Entities;
 
+use App\Entities\Users\Student;
+use App\Entities\Users\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Absence extends Model {

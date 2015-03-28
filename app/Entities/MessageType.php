@@ -1,24 +1,23 @@
-<?php namespace App;
+<?php namespace App\Entities;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Resource extends Model {
-    use SoftDeletes
+class MessageType extends Model {
+
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'resources';
+    protected $table = 'message_types';
 
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = ['url'];
+    protected $fillable = ['type'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -28,13 +27,13 @@ class Resource extends Model {
     protected $hidden = [];
 
     /**
-     * All the messages which contain a specific resource.
+     * All the messages with a specific type.
      * @access public
-     * @relationship many-many
+     * @relationship one-many
      * @return Message[]
      */
-    public function relatedMessages(){
-        return $this->hasMany(Message::class,'messages_resources','resource','message');
+    public function messagesOfType(){
+        return $this->hasMany(Message::class,'type');
     }
 
 }
