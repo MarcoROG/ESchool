@@ -12,9 +12,10 @@ interface IUserRepository {
     /**
      * Finds an user by his identifier(both hashed or not)
      * @param $identifier
+     * @param $hash
      * @return mixed
      */
-    public function find($identifier);
+    public function find($identifier,$hash);
 
     /**
      * Returns all the approved users

@@ -17,13 +17,14 @@ class UserRepository implements IUserRepository {
     /**
      * Finds an user by his identifier(both hashed or not)
      * @param $identifier
+     * @param $hash
      * @return mixed
      */
-    public function find($identifier){
-        if(is_string($identifier)){
-            return User::find(Hashids::decode($identifier))->first();
+    public function find($identifier,$hash=true){
+        if($hash){
+            return User::find(Hashids::decode($identifier)[0]);
         }
-        return User::find($identifier)->first();
+        return User::find($identifier);
     }
 
     /**
