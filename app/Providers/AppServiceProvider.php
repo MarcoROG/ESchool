@@ -1,5 +1,7 @@
 <?php namespace App\Providers;
 
+use App\Repositories\Contracts\IUserRepository as UserContract;
+use App\Repositories\Eloquent\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider {
@@ -29,6 +31,8 @@ class AppServiceProvider extends ServiceProvider {
 			'Illuminate\Contracts\Auth\Registrar',
 			'App\Services\Registrar'
 		);
+
+        $this->app->bind(UserContract::class, UserRepository::class);
 	}
 
 }

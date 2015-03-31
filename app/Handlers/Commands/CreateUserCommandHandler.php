@@ -2,6 +2,7 @@
 
 use App\Commands\CreateUserCommand;
 use App\Entities\Users\User;
+use App\Repositories\Contracts\IUserRepository;
 use Illuminate\Support\Facades\Mail;
 use Vinkla\Hashids\Facades\Hashids;
 
@@ -15,18 +16,12 @@ class CreateUserCommandHandler {
 	 */
 	public function handle(CreateUserCommand $command)
 	{
-        $user = User::create(array_except($command->data,'role'));
-        if($user) {
-            $user->delete();//Soft delete the user
-            $user->assignRole(Hashids::decode($command->data['role'])[0]);
-            $mail=$user->email;
-            Mail::queue('emails.registration',['hash'=>Hashids::encode($user->id)], function($message) use($mail){
-                $message->from('noreply@liceotosi.va.it','Liceo Tosi');
-                $message->to($mail)->subject('Attivazione');
-            });
-            return $user;
-        }
-
-        return false;
-	}
+        $user = $command->users->create($command->data);
+        $mail=$user->email;
+        Mail::queue('emails.registration',['hash'=>Hashids::encode($user->id)], function($message) use($mail){
+            $message->from('noreply@liceotosi.va.it','Liceo Tosi');
+            $message->to($mail)->subject('Attivazione');
+        });
+        return $user;
+    }
 }

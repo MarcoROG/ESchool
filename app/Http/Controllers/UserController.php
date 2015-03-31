@@ -5,6 +5,7 @@ use App\Http\Requests;
 use App\Http\Requests\AddUserRequest;
 use App\Http\Requests\EditUserRequest;
 use App\Entities\Users\User;
+use App\Repositories\Contracts\IUserRepository;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers as AuthenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Auth;
@@ -16,11 +17,13 @@ use Vinkla\Hashids\Facades\Hashids;
 class UserController extends Controller {
     use AuthenticatesAndRegistersUsers;
 
+    protected $users;
 
-    function __construct(Registrar $reg)
+    function __construct(Registrar $reg,IUserRepository $u)
     {
         //$this->middleware('auth');
         $this->registrar=$reg;
+        $this->users=$u;
     }
 
     /**
@@ -29,7 +32,7 @@ class UserController extends Controller {
      */
     public function getAll(){
         return view('users.all')->with('users',
-            User::where('approved','=',true)->get());
+            $this->users->allApproved());
 	}
 
     /**
@@ -39,7 +42,7 @@ class UserController extends Controller {
      */
     public function register(AddUserRequest $request){
         $request['approved']=true;
-        if($this->dispatch(new CreateUserCommand($request->all()))){
+        if($this->dispatch(new CreateUserCommand($request->all(),$this->users))){
             Flash::success('Utente registrato correttamente.');
         }else {
             Flash::error('Errore durante la creazione dell\'utente.');
@@ -63,7 +66,7 @@ class UserController extends Controller {
      * @return $this
      */
     public function getEditUser($hash){
-        $user=User::findOrFail(Hashids::decode($hash)[0]);
+        $user=$this->users->find($hash);
         return view('users.edit')->with('user',$user)
             ->with('mode',Auth::user()->id==$user->id?'auto':'secretary');
     }
@@ -76,16 +79,9 @@ class UserController extends Controller {
      * @return Redirect
      */
     public function editUser($hash,EditUserRequest $request){
-        $user=User::findOrFail(Hashids::decode($hash)[0]);
-
-        $data=$request->except('password','_token','_method','action');
-        $data['catholic']=isset($request['catholic']);
-        $user->fill($data);
-        if($request->has('password')){
-            $user->password=$request['password'];
-        }
-        $user->save();
-        return redirect('users/'.$user->id.'/profile');
+        $data=$request->except('_token','_method','action');
+        $this->users->update($hash,$data);
+        return redirect('users/'. $hash .'/profile');
     }
 
     /**
@@ -94,20 +90,18 @@ class UserController extends Controller {
      * @return $this
      */
     public function getUser($hash){
-        $user = User::findOrFail(Hashids::decode($hash)[0]);
+        $user = $this->users->find($hash);
         if(!$user['approved'])Flash::warning('Questo utente non è ancora stato approvato!');
         return view('users.user')->with('user', $user);
     }
 
     /**
-     * Validates an user using his token
+     * Validates an user by email
      * @param $hash
      * @return Redirect
      */
-    public static function verifyUser($hash){
-        $user=User::findOrFail(Hashids::decode($hash)[0]);
-        $user->restore();
-        if(!Auth::user()) Auth::login($user);
+    public function verifyUser($hash){
+        $this->users->verifyAndAuth($hash);
         Flash::success('Verifica account avvenuta con successo!');
         return redirect(url('home'));
     }
@@ -119,8 +113,7 @@ class UserController extends Controller {
      * @return Redirect
      */
     public function approveUser($hash,$value){
-        $user=User::findOrFail(Hashids::decode($hash)[0]);
-        if($user->approve($value)) {
+        if($this->users->approve($hash,$value)) {
             Flash::success('Operazione effettuata con successo!');
             return redirect(url('users/unapproved'));
         }
@@ -132,6 +125,6 @@ class UserController extends Controller {
      */
     public function getUnapproved(){
         return view('users.approve')->with('users',
-            User::where('approved','=',false)->get());
+            $this->users->allUnapproved());
     }
 }
