@@ -14,14 +14,17 @@
             </div>
         </div>
     @endif
-@elseif($errors->any())
+@endif
+@if($errors->any())
+    @foreach($errors as $e)
     <div class="row dismissable">
         <div class="col offset-s1 s10 card-panel error">
             <div class="row">
                 <i class="col s1 small mdi-alert-error"></i>
-                <span class="col s10">{{$errors[0]}}</span>
+                <span class="col s10">{{$e}}</span>
                 <i class="dismisser col s1 small mdi-content-clear"></i>
             </div>
         </div>
     </div>
+    @endforeach
 @endif

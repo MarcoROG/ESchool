@@ -22,9 +22,9 @@ class UserRepository implements IUserRepository {
      */
     public function find($identifier,$hash=true){
         if($hash){
-            return User::find(Hashids::decode($identifier)[0]);
+            return User::findOrFail(Hashids::decode($identifier)[0]);
         }
-        return User::find($identifier);
+        return User::findOrFail($identifier);
     }
 
     /**
