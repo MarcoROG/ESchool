@@ -10,6 +10,7 @@ class HomeController extends Controller {
     function __construct()
     {
         $this->middleware('guest', ['except' => 'authenticatedIndex']);
+        $this->middleware('auth',['except'=>'index']);
     }
 
     public function index(){

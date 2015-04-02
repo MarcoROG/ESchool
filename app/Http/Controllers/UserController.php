@@ -66,9 +66,12 @@ class UserController extends Controller {
      * @return $this
      */
     public function getEditUser($hash){
+        if(Auth::user()->id==Hashids::decode($hash)[0]||Auth::user()->can('edit.users')){
         $user=$this->users->find($hash);
         return view('users.edit')->with('user',$user)
             ->with('mode',Auth::user()->id==$user->id?'auto':'secretary');
+        }
+        return redirect()->back();
     }
 
 

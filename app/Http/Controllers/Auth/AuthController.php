@@ -4,6 +4,7 @@ use App\Commands\CreateUserCommand;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddUserRequest;
 use App\Entities\Users\User;
+use App\Repositories\Contracts\IUserRepository;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers as AuthenticatesAndRegistersUsers;
@@ -87,9 +88,9 @@ class AuthController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function postRegister(AddUserRequest $request)
+    public function postRegister(AddUserRequest $request, IUserRepository $u)
     {
-        $user = $this->dispatch(new CreateUserCommand($request->all()));
+        $user = $this->dispatch(new CreateUserCommand($request->all(),$u));
         if($user){
             Flash::info('Controlla la tua email in attesa del messaggio di attivazione.');
             $this->auth->login($user);
