@@ -40,7 +40,7 @@ class UserController extends Controller {
      * @param AddUserRequest $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function register(AddUserRequest $request){
+    public function create(AddUserRequest $request){
         $request['approved']=true;
         if($this->dispatch(new CreateUserCommand($request->all(),$this->users))){
             Flash::success('Utente registrato correttamente.');
@@ -65,7 +65,7 @@ class UserController extends Controller {
      * @param $hash
      * @return $this
      */
-    public function getEditUser($hash){
+    public function getEdit($hash){
         if(Auth::user()->id==Hashids::decode($hash)[0]||Auth::user()->can('edit.users')){
         $user=$this->users->find($hash);
         return view('users.edit')->with('user',$user)
@@ -81,7 +81,7 @@ class UserController extends Controller {
      * @param EditUserRequest $request
      * @return Redirect
      */
-    public function editUser($hash,EditUserRequest $request){
+    public function edit($hash,EditUserRequest $request){
         $data=$request->except('_token','_method','action');
         $this->users->update($hash,$data);
         return redirect('users/'. $hash .'/profile');
@@ -92,7 +92,7 @@ class UserController extends Controller {
      * @param $hash
      * @return $this
      */
-    public function getUser($hash){
+    public function getProfile($hash){
         $user = $this->users->find($hash);
         if(!$user['approved'])Flash::warning('Questo utente non è ancora stato approvato!');
         return view('users.user')->with('user', $user);
@@ -103,7 +103,7 @@ class UserController extends Controller {
      * @param $hash
      * @return Redirect
      */
-    public function verifyUser($hash){
+    public function verify($hash){
         $this->users->verifyAndAuth($hash);
         Flash::success('Verifica account avvenuta con successo!');
         return redirect(url('home'));
@@ -115,7 +115,7 @@ class UserController extends Controller {
      * @param $value
      * @return Redirect
      */
-    public function approveUser($hash,$value){
+    public function approve($hash,$value){
         if($this->users->approve($hash,$value)) {
             Flash::success('Operazione effettuata con successo!');
             return redirect(url('users/unapproved'));

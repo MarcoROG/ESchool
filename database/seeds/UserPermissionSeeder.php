@@ -20,6 +20,7 @@ class UserPermissionSeeder extends Seeder {
             'slug' => [
                 'create' => false,
                 'view' => true,
+                'view.specific' =>true,
                 'edit' => false,
                 'approve' => false,
                 'delete' => false,

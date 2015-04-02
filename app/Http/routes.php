@@ -23,14 +23,24 @@ Route::get('/home','HomeController@authenticatedIndex');
 
 Route::group(['prefix'=>'users', 'middleware'=>['acl']],function(){
     Route::group(['middleware'=>'auth'],function(){
-        Route::get('/','UserController@getAll');//Does this make sense? everyone can view an user
-        Route::post('/','UserController@register');//Does this make sense? the add page is blocked and has a csrf token
+        Route::get('/','UserController@getAll');
+        Route::post('/','UserController@create');
         Route::get('add',['uses'=>'UserController@getSubscriptionInterface','can'=>'create.users']);
         Route::get('unapproved',['uses'=>'UserController@getUnapproved','can'=>'approve.users']);
-        Route::get('{hash}/profile',['uses'=>'UserController@getUser','can'=>'view.users']);
-        Route::get('{hash}/edit',['uses'=>'UserController@getEditUser',/*'can'=>'edit.users'*/]);
-        Route::patch('{hash}/edit','UserController@editUser');
-        Route::patch('{hash}/approve/{value}','UserController@approveUser');
+        Route::get('{hash}/profile',['uses'=>'UserController@getProfile','can'=>'view.specific.users']);
+        Route::get('{hash}/edit',['uses'=>'UserController@getEdit',/*'can'=>'edit.users'*/]);
+        Route::patch('{hash}/edit','UserController@edit');
+        Route::patch('{hash}/approve/{value}','UserController@approve');
     });
-    Route::patch('{hash}/verify','UserController@verifyUser');
+    Route::patch('{hash}/verify','UserController@verify');
+});
+
+Route::group(['prefix'=>'schoolyears','middleware'=>['auth','acl']],function(){
+    Route::get('/',['uses'=>'SchoolYearsController@getAll','can'=>'view.schoolyears']);
+    Route::get('current',['uses'=>'SchoolYearsController@getCurrent','can'=>'view.schoolyears']);
+    Route::post('/',['uses'=>'SchoolYearsController@create']);
+    Route::get('add',['uses'=>'SchoolYearsController@getInsertionInterface','can'=>'create.schoolyears']);
+    Route::get('{hash}',['uses'=>'SchoolYearsController@get','can'=>'view.specific.schoolyears']);
+    Route::get('{hash}/edit',['uses'=>'SchoolYearsController@getEdit','can'=>'edit.schoolyears']);
+    Route::patch('{hash}/edit',['uses'=>'SchoolYearsController@edit']);
 });
