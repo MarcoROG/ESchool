@@ -2,12 +2,21 @@
 
 use App\Entities\SchoolYear;
 use App\Http\Requests;
-use App\Http\Controllers\Controller;
+use App\Repositories\Contracts\ISchoolYearRepository;
 
-use Illuminate\Http\Request;
 
 class SchoolYearsController extends Controller {
 
+    protected $schoolyears;
+    function __construct(ISchoolYearRepository $r)
+    {
+        $this->schoolyears=$r;
+    }
+
+    /**
+     * Returns all the schoolyears
+     * @return $this
+     */
     public function getAll()
     {
         return view('schoolyears.all')->with('years',SchoolYear::all());
@@ -18,19 +27,24 @@ class SchoolYearsController extends Controller {
 
     }
 
-    public static function create()
+    public function create()
     {
 
     }
 
-    public static function getInsertionInterface()
+    public function getInsertionInterface()
     {
 
     }
 
-    public static function get($hash)
+    /**
+     * Returns the specified schoolyear
+     * @param $hash
+     * @return $this
+     */
+    public function get($hash)
     {
-
+        return view('schoolyears.year')->with('y',$this->schoolyears->find($hash));
     }
 
     public function getEdit($hash){

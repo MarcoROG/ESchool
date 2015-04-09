@@ -7,7 +7,6 @@
  */
 
 use App\Entities\SchoolYear;
-use App\Entities\Users\User;
 use App\Repositories\Contracts\IGenericCRUD;
 use App\Repositories\Contracts\ISchoolYearRepository;
 use Carbon\Carbon;
@@ -22,9 +21,9 @@ class SchoolYearRepository implements IGenericCRUD,ISchoolYearRepository {
      */
     public function find($identifier,$hash=true){
         if($hash){
-            return User::findOrFail(Hashids::decode($identifier)[0]);
+            return SchoolYear::findOrFail(Hashids::decode($identifier)[0]);
         }
-        return User::findOrFail($identifier);
+        return SchoolYear::findOrFail($identifier);
     }
 
     /**
