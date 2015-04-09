@@ -68,18 +68,4 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         $this->attributes['birth_day']= Carbon::createFromDate($date[2],$date[1],$date[0]);
     }
 
-    /**
-     * Approves or removes an user.
-     * @param $value
-     * @return bool|null
-     * @throws \Exception
-     */
-    public function approve($value){
-        if($value==1){
-            $this->approved=$value;
-            return $this->save();
-        }else{
-            return $this->delete();
-        }
-    }
 }
