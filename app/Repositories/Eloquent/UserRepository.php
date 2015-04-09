@@ -10,10 +10,11 @@
 
 
 use App\Entities\Users\User;
+use App\Repositories\Contracts\IGenericCRUD;
 use App\Repositories\Contracts\IUserRepository;
 use Vinkla\Hashids\Facades\Hashids;
 
-class UserRepository implements IUserRepository {
+class UserRepository implements IUserRepository,IGenericCRUD {
     /**
      * Finds an user by his identifier(both hashed or not)
      * @param $identifier
@@ -57,7 +58,7 @@ class UserRepository implements IUserRepository {
         if(array_key_exists('password',$infos)){
             $user->password=$infos['password'];
         }
-        $user->save();
+        return $user->save();
     }
 
     /**
@@ -101,5 +102,14 @@ class UserRepository implements IUserRepository {
         }else{
             return $user->delete();
         }
+    }
+
+    /**
+     * Deletes the specified user.
+     * @param $hash
+     * @return mixed
+     */
+    public function delete($hash){
+        return $this->find($hash)->forceDelete();
     }
 }

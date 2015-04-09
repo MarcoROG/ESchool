@@ -10,14 +10,6 @@
 
 interface IUserRepository {
     /**
-     * Finds an user by his identifier(both hashed or not)
-     * @param $identifier
-     * @param $hash
-     * @return mixed
-     */
-    public function find($identifier,$hash);
-
-    /**
      * Returns all the approved users
      * @return mixed
      */
@@ -28,22 +20,6 @@ interface IUserRepository {
      * @return mixed
      */
     public function allUnapproved();
-
-
-    /**
-     * Updates the user data with an array of given parameters
-     * @param $identifier
-     * @param array $data
-     * @return mixed
-     */
-    public function update($identifier,array $data);
-
-    /**
-     * Creates an user with the given parameters.
-     * @param array $data
-     * @return mixed
-     */
-    public function create(array $data);
 
     /**
      * Verifies and logs in an user

@@ -26,6 +26,7 @@ class SUSeeder extends Seeder {
      */
     public function run()
     {
+        $this->command->info('Seeding the super user');
         $u = new User();
         $u->gender = mt_rand(0,1)==0?'M':'F';
         $u->name= 'Super';
@@ -40,6 +41,7 @@ class SUSeeder extends Seeder {
         $u->token= Helper::generateToken();
         $u->approved=true;
         $u->save();
+        $this->command->info('Assigning roles to the super user');
         foreach(Role::all() as $r) {
             $u->assignRole($r->id);
         }

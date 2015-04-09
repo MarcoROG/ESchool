@@ -13,6 +13,7 @@ class UserPermissionSeeder extends Seeder {
      */
     public function run()
     {
+        $this->command->info('Creating user permissions');
         $genericUser=Permission::create([
             'name' => 'users',
             'slug' => [
@@ -36,11 +37,11 @@ class UserPermissionSeeder extends Seeder {
             'inherit_id' => $genericUser->getKey(),
             'description' => 'secretary permission regarding users'
         ]);
+        $this->command->info('Assigning them to roles');
         $roles=Role::all();
         foreach($roles as $r){
             if($r->slug=='secretary'){
                 $r->assignPermission('users.secretary');
-                $this->command->info('secretary');
             }else{
                 $r->assignPermission('users');
             }

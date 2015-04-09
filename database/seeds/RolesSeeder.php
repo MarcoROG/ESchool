@@ -14,7 +14,7 @@ class RolesSeeder extends Seeder {
      */
     public function run()
     {
-
+        $this->command->info('Seeding the roles');
         Role::create(['name'=>'Studente',
             'slug'=>'student',
             'description'=>'An user who attends standard didactic lessons.'

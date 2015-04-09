@@ -27,7 +27,7 @@ class UsersSeeder extends Seeder {
         'Pigni','Piacentini','Camarda','Salmoiraghi','Motta','Raimondi'];
         $places=['Olgiate Olona','Solbiate Olona','Fagnano Olona','Busto Arsizio',
         'Castano Primo','Borsano','Quarto Oggiaro'];
-
+        $this->command->info('Seeding the users');
         for($i=0;$i<25;$i++){
             $u = new User();
             $u->gender = mt_rand(0,1)==0?'M':'F';

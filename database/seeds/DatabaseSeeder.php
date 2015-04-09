@@ -45,15 +45,19 @@ class DatabaseSeeder extends Seeder {
 	 */
 	public function run()
 	{
+        $this->command->info('Truncating the tables');
         Model::unguard();
         DB::statement("SET foreign_key_checks=0");
         foreach($this->tables as $t){
             DB::table($t)->truncate();
         }
         DB::statement("SET foreign_key_checks=1");
+        $this->command->info('Done');
+
         $this->call('RolesSeeder');
         $this->call('UsersSeeder');
         $this->call('SUSeeder');
+        $this->call('SchoolYearsSeeder');
         $this->call('UserPermissionSeeder');
         $this->call('SchoolYearsPermissionSeeder');
 	}

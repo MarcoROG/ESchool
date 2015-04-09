@@ -13,6 +13,7 @@ class SchoolYearsPermissionSeeder extends Seeder {
      */
     public function run()
     {
+        $this->command->info('Seeding schoolyears permissions');
         $genericUser=Permission::create([
             'name' => 'schoolyears',
             'slug' => [
@@ -25,7 +26,6 @@ class SchoolYearsPermissionSeeder extends Seeder {
             ],
             'description' => 'generic permission regarding school years'
         ]);
-        $this->command->info('Generic');
         $secretaryUser = Permission::create([
             'name' => 'schoolyears.secretary',
             'slug' => [
@@ -37,7 +37,7 @@ class SchoolYearsPermissionSeeder extends Seeder {
             'inherit_id' => $genericUser->getKey(),
             'description' => 'secretary permission regarding school years'
         ]);
-        $this->command->info('Secretary');
+        $this->command->info('Assigning them to roles');
         $roles=Role::all();
         foreach($roles as $r){
             if($r->slug=='secretary'){
