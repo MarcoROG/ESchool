@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 use Kodeine\Acl\Models\Eloquent\Permission;
 use Kodeine\Acl\Models\Eloquent\Role;
 
-class UserPermissionSeeder extends Seeder {
+class SchoolYearsPermissionSeeder extends Seeder {
 
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class UserPermissionSeeder extends Seeder {
     public function run()
     {
         $genericUser=Permission::create([
-            'name' => 'users',
+            'name' => 'schoolyears',
             'slug' => [
                 'create' => false,
                 'view' => true,
@@ -23,10 +23,11 @@ class UserPermissionSeeder extends Seeder {
                 'approve' => false,
                 'delete' => false,
             ],
-            'description' => 'generic permission regarding users'
+            'description' => 'generic permission regarding school years'
         ]);
+        $this->command->info('Generic');
         $secretaryUser = Permission::create([
-            'name' => 'users.secretary',
+            'name' => 'schoolyears.secretary',
             'slug' => [
                 'create' => true,
                 'edit' => true,
@@ -34,15 +35,15 @@ class UserPermissionSeeder extends Seeder {
                 'delete' => true,
             ],
             'inherit_id' => $genericUser->getKey(),
-            'description' => 'secretary permission regarding users'
+            'description' => 'secretary permission regarding school years'
         ]);
+        $this->command->info('Secretary');
         $roles=Role::all();
         foreach($roles as $r){
             if($r->slug=='secretary'){
-                $r->assignPermission('users.secretary');
-                $this->command->info('secretary');
+                $r->assignPermission('schoolyears.secretary');
             }else{
-                $r->assignPermission('users');
+                $r->assignPermission('schoolyears');
             }
         }
     }

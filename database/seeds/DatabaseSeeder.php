@@ -55,6 +55,7 @@ class DatabaseSeeder extends Seeder {
         $this->call('UsersSeeder');
         $this->call('SUSeeder');
         $this->call('UserPermissionSeeder');
+        $this->call('SchoolYearsPermissionSeeder');
 	}
 
 

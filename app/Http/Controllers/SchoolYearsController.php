@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Entities\SchoolYear;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -9,7 +10,7 @@ class SchoolYearsController extends Controller {
 
     public function getAll()
     {
-
+        return view('schoolyears.all')->with('years',SchoolYear::all());
 	}
 
     public function getCurrent()

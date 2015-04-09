@@ -6,7 +6,7 @@
  * Time: 13:18
  */
 use App\Services\Helper;
-use App\Users\User;
+use App\Entities\Users\User;
 use Illuminate\Database\Seeder;
 use Kodeine\Acl\Models\Eloquent\Role;
 
@@ -36,7 +36,7 @@ class SUSeeder extends Seeder {
         $u->email='mark.sg97@gmail.com';
         $u->telephone ='0331375209';
         $u->mobile = '3485783906';
-        $u->password=bcrypt('passwordss');
+        $u->password=bcrypt('password');
         $u->token= Helper::generateToken();
         $u->approved=true;
         $u->save();

@@ -2,7 +2,7 @@
 use App\Services\Helper;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
-use App\Users\User;
+use App\Entities\Users\User;
 /**
  * Created by PhpStorm.
  * User: marcobellan
@@ -34,7 +34,7 @@ class UsersSeeder extends Seeder {
             $u->name= $names[$u->gender=='F'][mt_rand(0,9)];
             $u->surname= $surnames[mt_rand(0,11)];
             $u->birth_place= $places[mt_rand(0,6)];
-            //$u->birth_day= Carbon::create(mt_rand(1995,2003),mt_rand(1,12),mt_rand(1,28));
+            $u->birth_day= mt_rand(1,28).'/'.mt_rand(1,12).'/'.mt_rand(1993,2003);
             $u->catholic=mt_rand(0,1);
             $u->address='Via dei munghi 14, munghiland';
             $u->email='user'.$i.'@liceotosi.va.it';

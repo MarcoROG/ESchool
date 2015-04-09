@@ -8,5 +8,6 @@
 //Set of elements to convert a restful resource name in a readable name in a given language.
 //@applications: dinamically populate navbar
 return[
-    'users'=>'Utenti'
+    'users'=>'Utenti',
+    'schoolyears'=>'Anni scolastici'
 ];

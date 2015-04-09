@@ -14,6 +14,7 @@
             </div>
     @endif
     @if(Auth::user()->can('create.users'))
+
             <div class="col offset-s4 s3">
                 <a href="{{url('users/add')}}"
                    class="btn waves-effect waves-light">
