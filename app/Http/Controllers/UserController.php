@@ -35,6 +35,7 @@ class UserController extends Controller {
             $this->users->allApproved());
 	}
 
+
     /**
      * Registers an user without logging him in. Action performed by a secretary
      * @param AddUserRequest $request

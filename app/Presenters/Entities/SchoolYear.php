@@ -33,6 +33,10 @@ class SchoolYear extends Presenter {
         .trans('dates.month.'.$this->last_day_first_semester->month);
     }
 
+    /**
+     * Presents the second term dates in a readable way
+     * @return string
+     */
     public function second_term(){
         return $this->first_day_second_semester->day.' '
         .trans('dates.month.'.$this->first_day_second_semester->month).' - '

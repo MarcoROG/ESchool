@@ -5,6 +5,16 @@
 @endsection
 
 @section('actions')
+    @if(Auth::user()->can('edit.schoolyears'))
+    <div class="row">
+        <div class="col offset-s1 s1">
+            <a href="{{url('schoolyears/'.Hashids::encode($y->id).'/edit')}}">
+                <i class="mdi-image-edit small tooltipped eventful"
+                   data-position="top" data-delay="50" data-tooltip="Modifica anno scolastico"></i>
+            </a>
+        </div>
+    </div>
+    @endif
 @endsection
 
 @section('info')

@@ -48,7 +48,7 @@ class SchoolYearsController extends Controller {
     }
 
     public function getEdit($hash){
-
+        return view('schoolyears.edit')->with('year',$this->schoolyears->find($hash));
     }
 
     public function edit($hash){
