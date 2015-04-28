@@ -51,7 +51,9 @@ class SchoolYearsController extends Controller {
         return view('schoolyears.edit')->with('year',$this->schoolyears->find($hash));
     }
 
-    public function edit($hash){
-
+    public function edit($hash, EditSchoolYearRequest $request){
+        $data=$request->except('_token','_method','action');
+        $this->schoolyears->update($hash,$data);
+        return redirect('schoolyears/'. $hash .'/profile');
     }
 }

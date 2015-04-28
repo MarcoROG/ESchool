@@ -12,8 +12,7 @@ class EditUserRequest extends Request {
 	 */
 	public function authorize()
 	{
-        //return (Auth::user()->can('edit.user')||Auth::user()->id==$this['id']);
-        return true;
+        return (Auth::user()->can('edit.users')||Auth::user()->id==$this['id']);
 	}
 
 	/**

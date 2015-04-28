@@ -12,8 +12,7 @@ class AddUserRequest extends Request {
 	 */
 	public function authorize()
 	{
-		//return Auth::user()->can('add.user');
-        return true;
+		return Auth::user()->can('add.users');
 	}
 
 	/**
