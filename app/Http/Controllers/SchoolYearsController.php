@@ -2,7 +2,9 @@
 
 use App\Entities\SchoolYear;
 use App\Http\Requests;
+use App\Http\Requests\EditSchoolYearRequest;
 use App\Repositories\Contracts\ISchoolYearRepository;
+use Laracasts\Flash\Flash;
 
 
 class SchoolYearsController extends Controller {
@@ -54,6 +56,7 @@ class SchoolYearsController extends Controller {
     public function edit($hash, EditSchoolYearRequest $request){
         $data=$request->except('_token','_method','action');
         $this->schoolyears->update($hash,$data);
-        return redirect('schoolyears/'. $hash .'/profile');
+        Flash::success('Anno scolastico modificato correttamente');
+        return redirect('schoolyears/'. $hash);
     }
 }

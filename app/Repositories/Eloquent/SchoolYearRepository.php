@@ -21,9 +21,9 @@ class SchoolYearRepository implements IGenericCRUD,ISchoolYearRepository {
      */
     public function find($identifier,$hash=true){
         if($hash){
-            return SchoolYear::findOrFail(Hashids::decode($identifier)[0]);
+            return SchoolYear::find(Hashids::decode($identifier)[0]);
         }
-        return SchoolYear::findOrFail($identifier);
+        return SchoolYear::find($identifier);
     }
 
     /**

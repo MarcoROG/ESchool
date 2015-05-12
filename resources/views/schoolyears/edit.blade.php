@@ -21,7 +21,7 @@
                 <div class="input-field col s5 offset-s1">
                     <i class="mdi-action-event prefix"></i>
                     <input type="text" name="first_day_first_semester" id="first_day_first_semester" maxlength="30"
-                           class="validate" value="{{old('first_day_first_semester',$year->first_day_first_semester->format('d-m-Y'))}}">
+                           class="validate" value="{{old('first_day_first_semester',$year->first_day_first_semester->format('d/m/Y'))}}">
                     <label for="first_day_first_semester">Inizio primo quadrimestre:</label>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                 <div class="input-field col s5 offset-s1">
                     <i class="mdi-action-event prefix"></i>
                     <input type="text" name="last_day_first_semester" id="last_day_first_semester" maxlength="30"
-                           class="validate" value="{{old('last_day_first_semester',$year->last_day_first_semester->format('d-m-Y'))}}">
+                           class="validate" value="{{old('last_day_first_semester',$year->last_day_first_semester->format('d/m/Y'))}}">
                     <label for="last_day_first_semester">Fine primo quadrimestre:</label>
                 </div>
             </div>
@@ -39,7 +39,7 @@
                 <div class="input-field col s5 offset-s1">
                     <i class="mdi-action-event prefix"></i>
                     <input type="text" name="first_day_second_semester" id="first_day_second_semester" maxlength="30"
-                           class="validate" value="{{old('first_day_second_semester',$year->first_day_second_semester->format('d-m-Y'))}}">
+                           class="validate" value="{{old('first_day_second_semester',$year->first_day_second_semester->format('d/m/Y'))}}">
                     <label for="first_day_second_semester">Inizio secondo quadrimestre:</label>
                 </div>
             </div>
@@ -48,7 +48,7 @@
                 <div class="input-field col s5 offset-s1">
                     <i class="mdi-action-event prefix"></i>
                     <input type="text" name="last_day_second_semester" id="last_day_second_semester" maxlength="30"
-                           class="validate" value="{{old('last_day_second_semester',$year->last_day_second_semester->format('d-m-Y'))}}">
+                           class="validate" value="{{old('last_day_second_semester',$year->last_day_second_semester->format('d/m/Y'))}}">
                     <label for="last_day_second_semester">Fine secondo quadrimestre:</label>
                 </div>
             </div>
